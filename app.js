@@ -218,19 +218,6 @@ contactForm.addEventListener(
         contactForm.reset();
     }
 );
-/* LOADER */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        document
-            .querySelector(".loader")
-            .classList
-            .add("hide");
-
-    }
-);
 
 /* DARK MODE */
 
