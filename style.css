@@ -64,8 +64,11 @@ html {
 
 .hero {
     height: 100vh;
-    background: url("https://placehold.co/1920x1080")
-        center/cover no-repeat;
+    background-image:url("https://static.vecteezy.com/system/resources/thumbnails/043/500/990/small/modern-living-room-design-with-gallery-wall-fresh-clean-light-contemporary-room-interior-photo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 .hero-overlay {
@@ -818,13 +821,6 @@ summary {
     }
 }
 
-@keyframes spin {
-
-    to {
-
-        transform: rotate(360deg);
-    }
-}
 
 /* FLOATING WHATSAPP */
 
