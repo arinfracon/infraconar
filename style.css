@@ -684,43 +684,43 @@ summary {
     font-weight: 600;
 }
 
-/* CONTACT */
+/* CONTACT SECTION */
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
 
 .contact-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
 
-    max-width: 800px;
-
-    margin: auto;
-
+.contact-form form {
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
 }
 
 .contact-form input,
 .contact-form textarea {
-
+    width: 100%;
     padding: 15px;
-
     border: 1px solid #ddd;
-
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .contact-form button {
-
+    width: 100%;
     padding: 15px;
-
     border: none;
-
     border-radius: 10px;
-
-    background: #b22222;
-
-    color: white;
-
     cursor: pointer;
 }
 
