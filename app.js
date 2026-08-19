@@ -1,175 +1,135 @@
-/* MOBILE MENU */
+// MOBILE MENU
 
-const menu = document.querySelector(".menu-btn");
+const menuBtn = document.querySelector(".menu-btn");
+const navbar = document.querySelector(".navbar");
 
-const navbar =
-    document.querySelector(".navbar");
+if (menuBtn && navbar) {
+    menuBtn.addEventListener("click", () => {
+        navbar.classList.toggle("active");
+    });
+}
 
-menu.addEventListener("click", () => {
 
-    navbar.classList.toggle("active");
+// ANIMATED COUNTERS
 
-});
+const counters = document.querySelectorAll(".counter");
 
-/* COUNTER */
+window.addEventListener("load", () => {
+    counters.forEach(counter => {
 
-const counters =
-    document.querySelectorAll(".counter");
+        const target = parseInt(counter.dataset.target) || 0;
+        let count = 0;
+        const step = Math.max(1, Math.ceil(target / 100));
 
-counters.forEach(counter => {
+        function updateCounter() {
 
-    const target =
-        +counter.dataset.target;
+            count += step;
 
-    let count = 0;
+            if (count >= target) {
+                counter.textContent = target + "+";
+                return;
+            }
 
-    const update = () => {
+            counter.textContent = count;
 
-        const increment =
-            target / 100;
-
-        if (count < target) {
-
-            count += increment;
-
-            counter.innerText =
-                Math.ceil(count);
-
-            setTimeout(
-                update,
-                20
-            );
-
-        } else {
-
-            counter.innerText =
-                target + "+";
+            requestAnimationFrame(updateCounter);
         }
-    };
 
-    update();
-
+        updateCounter();
+    });
 });
+
+
+// SERVICE GALLERY
+
+const modal = document.getElementById("designModal");
+const modalGallery = document.getElementById("modalGallery");
+const modalTitle = document.getElementById("modalTitle");
+const closeModal = document.querySelector(".close-modal");
 
 const designs = {
-
     "bedroom-designs": "Bedroom",
-
     "kitchen-designs": "Kitchen",
-
     "living-designs": "Living Room",
-
     "tv-designs": "TV Unit",
-
     "wardrobe-designs": "Wardrobe",
-
     "exterior-designs": "Exterior"
 };
 
-const modal =
-    document.getElementById(
-        "designModal"
-    );
+document.querySelectorAll(".service-btn").forEach(button => {
 
-const gallery =
-    document.getElementById(
-        "modalGallery"
-    );
+    button.addEventListener("click", () => {
 
-const title =
-    document.getElementById(
-        "modalTitle"
-    );
+        if (!modal) return;
 
-document.querySelectorAll(
-    ".service-btn"
-).forEach(button => {
+        modalGallery.innerHTML = "";
 
-    button.addEventListener(
-        "click",
-        () => {
+        const section = designs[button.dataset.target];
 
-            title.textContent =
-                designs[
-                button.dataset.target
-                ];
+        modalTitle.textContent = section;
 
-            gallery.innerHTML = "";
+        for (let i = 1; i <= 8; i++) {
 
-            for (let i = 1; i <= 4; i++) {
+            modalGallery.innerHTML +=
+                `<img src="https://placehold.co/500x350?text=${section}+${i}">`;
+        }
 
-                gallery.innerHTML +=
-                    `<img src="https://placehold.co/500x350?text=${designs[button.dataset.target]}+${i}">`;
-            }
-
-            modal.style.display =
-                "block";
-        });
+        modal.style.display = "block";
+    });
 });
 
-document.querySelector(
-    ".close-modal"
-).onclick = () => {
+if (closeModal && modal) {
 
-    modal.style.display =
-        "none";
-};
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}
 
-document.querySelectorAll(
-    ".quiz-btn"
-).forEach(button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+// STYLE QUIZ
 
-            document.getElementById(
-                "quizResult"
-            ).textContent =
-                "Your preferred style is: " +
-                button.dataset.style;
-        });
+document.querySelectorAll(".quiz-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const result = document.getElementById("quizResult");
+
+        if (result) {
+            result.textContent =
+                "Your style: " + button.dataset.style;
+        }
+    });
 });
+
+
 // QUOTE CALCULATOR
 
-document
-    .getElementById("calculateBtn")
-    .addEventListener("click", () => {
+const calculateBtn = document.getElementById("calculateBtn");
+
+if (calculateBtn) {
+
+    calculateBtn.addEventListener("click", () => {
 
         const area =
-            Number(
-                document.getElementById("area").value
-            );
+            Number(document.getElementById("area").value);
 
         const rate =
-            Number(
-                document.getElementById("package").value
-            );
+            Number(document.getElementById("package").value);
 
         const bedrooms =
-            Number(
-                document.getElementById("bedrooms").value
-            ) * 50000;
+            Number(document.getElementById("bedrooms").value) * 50000;
 
         const kitchens =
-            Number(
-                document.getElementById("kitchens").value
-            ) * 100000;
+            Number(document.getElementById("kitchens").value) * 100000;
 
         const living =
-            Number(
-                document.getElementById("living").value
-            ) * 40000;
+            Number(document.getElementById("living").value) * 40000;
 
         const wardrobes =
-            Number(
-                document.getElementById("wardrobes").value
-            ) * 25000;
+            Number(document.getElementById("wardrobes").value) * 25000;
 
         const tvUnits =
-            Number(
-                document.getElementById("tvUnits").value
-            ) * 30000;
+            Number(document.getElementById("tvUnits").value) * 30000;
 
         const total =
             area * rate +
@@ -179,101 +139,115 @@ document
             wardrobes +
             tvUnits;
 
-        document.getElementById(
-            "totalCost"
-        ).innerText =
-            "₹" +
-            total.toLocaleString(
-                "en-IN"
-            );
-
+        document.getElementById("totalCost").textContent =
+            "₹" + total.toLocaleString("en-IN");
     });
+}
+
 
 // MEETING
 
-document
-    .getElementById("meetingBtn")
-    .addEventListener("click", () => {
+const meetingBtn = document.getElementById("meetingBtn");
 
-        alert(
-            "Meeting request submitted."
-        );
+if (meetingBtn) {
 
+    meetingBtn.addEventListener("click", () => {
+
+        alert("Meeting request submitted.");
     });
-    const contactForm =
-    document.querySelector(
-        ".contact-form"
-    );
+}
 
-contactForm.addEventListener(
-    "submit",
-    function (event) {
 
-        event.preventDefault();
+// CONTACT FORM
 
-        alert(
-            "Thank you for contacting AR Infracon."
-        );
+const scriptURL =
+    "https://script.google.com/macros/s/AKfycbxZOcFMR-E0szRcRDxwRb0yVDthwnqeEbiQIYAnx9FgAalNGCBy0HyJnkjl5SU-SMpW/exec";
 
-        contactForm.reset();
-    }
-);
+const contactForm =
+    document.getElementById("contactForm");
 
-/* DARK MODE */
+if (contactForm) {
 
-document
-    .querySelector(".dark-mode-btn")
-    .addEventListener(
-        "click",
-        () => {
+    contactForm.addEventListener("submit", function (e) {
 
-            document.body
-                .classList
-                .toggle("dark");
+        e.preventDefault();
 
-        }
-    );
+        const submitBtn =
+            contactForm.querySelector(
+                "button[type='submit']"
+            );
 
-/* SCROLL TO TOP */
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+
+        const formData =
+            new FormData(contactForm);
+
+        fetch(scriptURL, {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+        })
+
+        .then(() => {
+
+            alert("Message sent successfully!");
+
+            contactForm.reset();
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit";
+        })
+
+        .catch(() => {
+
+            alert("Submission failed.");
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit";
+        });
+    });
+}
+
+
+// DARK MODE
+
+const darkModeBtn =
+    document.querySelector(".dark-mode-btn");
+
+if (darkModeBtn) {
+
+    darkModeBtn.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark");
+    });
+}
+
+
+// SCROLL TO TOP
 
 const scrollButton =
-    document.querySelector(
-        ".scroll-top"
-    );
+    document.querySelector(".scroll-top");
 
-window.addEventListener(
-    "scroll",
-    () => {
+if (scrollButton) {
 
-        if (
-            window.scrollY > 300
-        ) {
+    window.addEventListener("scroll", () => {
 
-            scrollButton
-                .classList
-                .add("show");
+        if (window.scrollY > 300) {
+
+            scrollButton.classList.add("show");
 
         } else {
 
-            scrollButton
-                .classList
-                .remove("show");
+            scrollButton.classList.remove("show");
         }
+    });
 
-    }
-);
-
-scrollButton.addEventListener(
-    "click",
-    () => {
+    scrollButton.addEventListener("click", () => {
 
         window.scrollTo({
-
             top: 0,
-
             behavior: "smooth"
-
         });
-
-    }
-);
+    });
+}
