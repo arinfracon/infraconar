@@ -53,7 +53,7 @@ const designs = {
     "bedroom-designs": {
         title: "Bedroom",
         images: [
-            "images/bedroom1.jpg",
+            "tuna.jpg",
             "images/bedroom2.jpg",
             "images/bedroom3.jpg",
             "images/bedroom4.jpg",
