@@ -42,18 +42,97 @@ window.addEventListener("load", () => {
 
 // SERVICE GALLERY
 
+// SERVICE GALLERY
+
 const modal = document.getElementById("designModal");
 const modalGallery = document.getElementById("modalGallery");
 const modalTitle = document.getElementById("modalTitle");
 const closeModal = document.querySelector(".close-modal");
 
 const designs = {
-    "bedroom-designs": "Bedroom",
-    "kitchen-designs": "Kitchen",
-    "living-designs": "Living Room",
-    "tv-designs": "TV Unit",
-    "wardrobe-designs": "Wardrobe",
-    "exterior-designs": "Exterior"
+    "bedroom-designs": {
+        title: "Bedroom",
+        images: [
+            "images/bedroom1.jpg",
+            "images/bedroom2.jpg",
+            "images/bedroom3.jpg",
+            "images/bedroom4.jpg",
+            "images/bedroom5.jpg",
+            "images/bedroom6.jpg",
+            "images/bedroom7.jpg",
+            "images/bedroom8.jpg"
+        ]
+    },
+
+    "kitchen-designs": {
+        title: "Kitchen",
+        images: [
+            "images/kitchen1.jpg",
+            "images/kitchen2.jpg",
+            "images/kitchen3.jpg",
+            "images/kitchen4.jpg",
+            "images/kitchen5.jpg",
+            "images/kitchen6.jpg",
+            "images/kitchen7.jpg",
+            "images/kitchen8.jpg"
+        ]
+    },
+
+    "living-designs": {
+        title: "Living Room",
+        images: [
+            "images/living1.jpg",
+            "images/living2.jpg",
+            "images/living3.jpg",
+            "images/living4.jpg",
+            "images/living5.jpg",
+            "images/living6.jpg",
+            "images/living7.jpg",
+            "images/living8.jpg"
+        ]
+    },
+
+    "tv-designs": {
+        title: "TV Unit",
+        images: [
+            "images/tv1.jpg",
+            "images/tv2.jpg",
+            "images/tv3.jpg",
+            "images/tv4.jpg",
+            "images/tv5.jpg",
+            "images/tv6.jpg",
+            "images/tv7.jpg",
+            "images/tv8.jpg"
+        ]
+    },
+
+    "wardrobe-designs": {
+        title: "Wardrobe",
+        images: [
+            "images/wardrobe1.jpg",
+            "images/wardrobe2.jpg",
+            "images/wardrobe3.jpg",
+            "images/wardrobe4.jpg",
+            "images/wardrobe5.jpg",
+            "images/wardrobe6.jpg",
+            "images/wardrobe7.jpg",
+            "images/wardrobe8.jpg"
+        ]
+    },
+
+    "exterior-designs": {
+        title: "Exterior",
+        images: [
+            "images/exterior1.jpg",
+            "images/exterior2.jpg",
+            "images/exterior3.jpg",
+            "images/exterior4.jpg",
+            "images/exterior5.jpg",
+            "images/exterior6.jpg",
+            "images/exterior7.jpg",
+            "images/exterior8.jpg"
+        ]
+    }
 };
 
 document.querySelectorAll(".service-btn").forEach(button => {
@@ -66,13 +145,21 @@ document.querySelectorAll(".service-btn").forEach(button => {
 
         const section = designs[button.dataset.target];
 
-        modalTitle.textContent = section;
+        if (!section) return;
 
-        for (let i = 1; i <= 8; i++) {
+        modalTitle.textContent = section.title;
 
-            modalGallery.innerHTML +=
-                `<img src="https://placehold.co/500x350?text=${section}+${i}">`;
-        }
+        section.images.forEach((image, index) => {
+
+            modalGallery.innerHTML += `
+                <img 
+                    src="${image}" 
+                    alt="${section.title} ${index + 1}"
+                    loading="lazy"
+                >
+            `;
+
+        });
 
         modal.style.display = "block";
     });
@@ -83,8 +170,8 @@ if (closeModal && modal) {
     closeModal.addEventListener("click", () => {
         modal.style.display = "none";
     });
-}
 
+}
 
 // STYLE QUIZ
 
