@@ -55,9 +55,9 @@ const designs = {
         images: [
             "b4.jfif",
             "b1.jfif",
-            "image.jpg",
-            "images/bedroom3.jpg",
-            "images/bedroom4.jpg",
+            "b2.webp",
+            "b3.jfif",
+            "b5.webp",
             "images/bedroom5.jpg",
             "images/bedroom6.jpg",
             "images/bedroom7.jpg",
