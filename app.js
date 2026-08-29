@@ -54,6 +54,7 @@ const designs = {
         title: "Bedroom",
         images: [
             "b4.jfif",
+            "a.jpg",
             "image.jpg",
             "images/bedroom3.jpg",
             "images/bedroom4.jpg",
