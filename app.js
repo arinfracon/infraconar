@@ -54,7 +54,7 @@ const designs = {
         title: "Bedroom",
         images: [
             "tuna.jpeg",
-            "images/bedroom2.jpg",
+            "images.jpg",
             "images/bedroom3.jpg",
             "images/bedroom4.jpg",
             "images/bedroom5.jpg",
