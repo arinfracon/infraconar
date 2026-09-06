@@ -339,3 +339,243 @@ if (scrollButton) {
         });
     });
 }
+/* =========================================
+HERO IMAGE SLIDER
+========================================= */
+
+const heroSlides = document.querySelectorAll(".hero-slide");
+const heroDots = document.querySelectorAll(".hero-dot");
+
+let currentHeroSlide = 0;
+
+function showHeroSlide(index) {
+
+```
+heroSlides.forEach((slide) => {
+    slide.classList.remove("active");
+});
+
+heroDots.forEach((dot) => {
+    dot.classList.remove("active");
+});
+
+heroSlides[index].classList.add("active");
+
+if (heroDots[index]) {
+    heroDots[index].classList.add("active");
+}
+```
+
+}
+
+function nextHeroSlide() {
+
+```
+currentHeroSlide++;
+
+if (currentHeroSlide >= heroSlides.length) {
+    currentHeroSlide = 0;
+}
+
+showHeroSlide(currentHeroSlide);
+```
+
+}
+
+/* Automatic slider every 5 seconds */
+
+if (heroSlides.length > 0) {
+
+```
+setInterval(nextHeroSlide, 5000);
+```
+
+}
+
+/* Manual dots */
+
+heroDots.forEach((dot, index) => {
+
+```
+dot.addEventListener("click", () => {
+
+    currentHeroSlide = index;
+
+    showHeroSlide(currentHeroSlide);
+
+});
+```
+
+});
+
+/* =========================================
+CONTACT POPUP
+========================================= */
+
+const contactPopup = document.getElementById("contactPopup");
+const closePopup = document.getElementById("closePopup");
+
+/*
+Popup appears when visitor opens website.
+
+After visitor closes it, localStorage remembers
+the choice so it doesn't keep appearing again.
+*/
+
+window.addEventListener("load", () => {
+
+```
+const popupClosed = localStorage.getItem("arInfraconPopupClosed");
+
+if (!popupClosed) {
+
+    setTimeout(() => {
+
+        contactPopup.classList.add("show");
+
+    }, 1200);
+
+}
+```
+
+});
+
+/* Close popup */
+
+if (closePopup) {
+
+```
+closePopup.addEventListener("click", () => {
+
+    contactPopup.classList.remove("show");
+
+    localStorage.setItem(
+        "arInfraconPopupClosed",
+        "true"
+    );
+
+});
+```
+
+}
+
+/* Close by clicking outside popup */
+
+if (contactPopup) {
+
+```
+contactPopup.addEventListener("click", (event) => {
+
+    if (event.target === contactPopup) {
+
+        contactPopup.classList.remove("show");
+
+        localStorage.setItem(
+            "arInfraconPopupClosed",
+            "true"
+        );
+
+    }
+
+});
+```
+
+}
+
+/* =========================================
+POPUP CONTACT FORM
+========================================= */
+
+const popupForm = document.getElementById("popupContactForm");
+
+if (popupForm) {
+
+```
+popupForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("popupName").value;
+
+    const phone =
+        document.getElementById("popupPhone").value;
+
+    const service =
+        document.getElementById("popupService").value;
+
+
+    const message =
+        `Hello AR Infracon,%0A%0A` +
+        `Name: ${name}%0A` +
+        `Phone: ${phone}%0A` +
+        `Service: ${service}%0A%0A` +
+        `I would like a free consultation.`;
+
+
+    window.open(
+        `https://wa.me/91119650333?text=${message}`,
+        "_blank"
+    );
+
+});
+```
+
+}
+
+/* =========================================
+SCROLL TOP
+========================================= */
+
+const scrollTopButton =
+document.querySelector(".scroll-top");
+
+if (scrollTopButton) {
+
+```
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 400) {
+
+        scrollTopButton.classList.add("show");
+
+    } else {
+
+        scrollTopButton.classList.remove("show");
+
+    }
+
+});
+
+
+scrollTopButton.addEventListener("click", () => {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+```
+
+}
+
+/* =========================================
+DARK MODE
+========================================= */
+
+const darkModeButton =
+document.querySelector(".dark-mode-btn");
+
+if (darkModeButton) {
+
+```
+darkModeButton.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+});
+```
+
+}
+
