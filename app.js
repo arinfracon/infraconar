@@ -375,11 +375,11 @@
             "bedroom-designs": {
                 title: "Bedroom",
                 images: [
-                    "b4.jfif",
-                    "b1.jfif",
-                    "b2.webp",
-                    "b3.jfif",
-                    "b5.webp",
+                   "025.jpg",
+                   "017.jpg",
+                    "023.jpg",
+                    "010.jpg",
+                    "014.jpg",
                     "01.jpg",
                     "02.jpg",
                     "03.jpg",
@@ -420,7 +420,7 @@
             "kitchen-designs": {
                 title: "Kitchen",
                 images: [
-                   "v1.mp4",
+                   "15.jpg",
                    "1.jpg",
                    "2.jpg",
                    "3.jpg",
@@ -459,7 +459,7 @@
                     "36.jpg",
                     "37.jpg",
                     "38.jpg",
-                    "images/kitchen8.jpg"
+                    "5.jpg"
                 ]
             },
 
