@@ -67,7 +67,7 @@ textarea {
 .logo img {
     display: block;
     width: auto;
-    height: 62px;
+    height: 79px;
     object-fit: contain;
 }
 
@@ -241,7 +241,7 @@ textarea {
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.9s ease;
+    transition: opacity 0.5s ease;
 }
 
 .hero-slide.active {
@@ -339,7 +339,7 @@ textarea {
     color: #fff;
     cursor: pointer;
     backdrop-filter: blur(4px);
-    transition: background 0.25s ease, transform 0.25s ease;
+    transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .hero-arrow:hover {
@@ -665,7 +665,7 @@ textarea {
     display: flex;
     align-items: center;
     gap: 60px;
-    animation: brandScroll 28s linear infinite;
+    animation: brandScroll 17s linear infinite;
     will-change: transform;
 }
 
