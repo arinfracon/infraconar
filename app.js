@@ -1,581 +1,1030 @@
-// MOBILE MENU
+/* =========================================================
+   AR INFRACON - FINAL app.js
+   IMPORTANT:
+   - Do NOT change your HTML page names or links.
+   - This file works with the existing pages.
+   - Homepage enhancements are created automatically by JS.
+   ========================================================= */
 
-const menuBtn = document.querySelector(".menu-btn");
-const navbar = document.querySelector(".navbar");
+(function () {
+    "use strict";
 
-if (menuBtn && navbar) {
-    menuBtn.addEventListener("click", () => {
-        navbar.classList.toggle("active");
-    });
-}
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* -----------------------------------------------------
+           MOBILE MENU
+        ----------------------------------------------------- */
+        const menuBtn = document.querySelector(".menu-btn");
+        const navbar = document.querySelector(".navbar");
+
+        if (menuBtn && navbar) {
+            menuBtn.addEventListener("click", function () {
+                navbar.classList.toggle("active");
+
+                const icon = menuBtn.querySelector("i");
+                if (icon) {
+                    icon.classList.toggle("fa-bars");
+                    icon.classList.toggle("fa-xmark");
+                }
+            });
+
+            navbar.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navbar.classList.remove("active");
+
+                    const icon = menuBtn.querySelector("i");
+                    if (icon) {
+                        icon.classList.remove("fa-xmark");
+                        icon.classList.add("fa-bars");
+                    }
+                });
+            });
+        }
 
 
-// ANIMATED COUNTERS
+        /* -----------------------------------------------------
+           HOMEPAGE HERO SLIDER
+           Created from the existing .hero element.
+           This means index.html links do NOT need changing.
+        ----------------------------------------------------- */
+        const oldHero = document.querySelector(".hero");
 
-const counters = document.querySelectorAll(".counter");
+        if (oldHero && !oldHero.classList.contains("hero-slider")) {
 
-window.addEventListener("load", () => {
-    counters.forEach(counter => {
+            const images = [
+                "https://static.vecteezy.com/system/resources/thumbnails/043/500/990/small/modern-living-room-design-with-gallery-wall-fresh-clean-light-contemporary-room-interior-photo.jpg",
+                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
+                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85",
+                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85",
+                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1800&q=85"
+            ];
 
-        const target = parseInt(counter.dataset.target) || 0;
-        let count = 0;
-        const step = Math.max(1, Math.ceil(target / 100));
+            oldHero.classList.add("hero-slider");
 
-        function updateCounter() {
+            const existingOverlay = oldHero.querySelector(".hero-overlay");
 
-            count += step;
+            /*
+             * The existing hero content is kept.
+             * We move it into the first slide so the existing
+             * buttons and links continue to work.
+             */
+            const content =
+                oldHero.querySelector(".hero-content");
 
-            if (count >= target) {
-                counter.textContent = target + "+";
+            oldHero.innerHTML = "";
+
+            const slides = [];
+            const dots = [];
+
+            images.forEach(function (image, index) {
+
+                const slide =
+                    document.createElement("div");
+
+                slide.className =
+                    "hero-slide" +
+                    (index === 0 ? " active" : "");
+
+                const img =
+                    document.createElement("img");
+
+                img.src = image;
+                img.alt =
+                    "AR Infracon Interior Design " +
+                    (index + 1);
+
+                slide.appendChild(img);
+
+                if (index === 0 && content) {
+                    slide.appendChild(content);
+                }
+
+                const overlay =
+                    document.createElement("div");
+
+                overlay.className =
+                    "hero-overlay";
+
+                slide.appendChild(overlay);
+
+                /*
+                 * Put content above the overlay.
+                 */
+                if (index === 0 && content) {
+                    slide.appendChild(content);
+                }
+
+                oldHero.appendChild(slide);
+                slides.push(slide);
+            });
+
+            /*
+             * Fix the first slide so the original content appears
+             * only once and above the overlay.
+             */
+            if (content) {
+                const firstSlide = slides[0];
+                firstSlide.appendChild(content);
+            }
+
+            const dotsWrap =
+                document.createElement("div");
+
+            dotsWrap.className =
+                "hero-dots";
+
+            images.forEach(function (_, index) {
+
+                const dot =
+                    document.createElement("button");
+
+                dot.type = "button";
+                dot.className =
+                    "hero-dot" +
+                    (index === 0 ? " active" : "");
+
+                dot.setAttribute(
+                    "aria-label",
+                    "Show interior image " + (index + 1)
+                );
+
+                dotsWrap.appendChild(dot);
+                dots.push(dot);
+            });
+
+            oldHero.appendChild(dotsWrap);
+
+            let current = 0;
+            let timer = null;
+
+            function showSlide(index) {
+
+                if (!slides.length) return;
+
+                current =
+                    (index + slides.length) %
+                    slides.length;
+
+                slides.forEach(function (slide, i) {
+                    slide.classList.toggle(
+                        "active",
+                        i === current
+                    );
+                });
+
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle(
+                        "active",
+                        i === current
+                    );
+                });
+            }
+
+            function startSlider() {
+
+                clearInterval(timer);
+
+                timer = setInterval(function () {
+                    showSlide(current + 1);
+                }, 5000);
+            }
+
+            dots.forEach(function (dot, index) {
+
+                dot.addEventListener("click", function () {
+                    showSlide(index);
+                    startSlider();
+                });
+
+            });
+
+            oldHero.addEventListener("mouseenter", function () {
+                clearInterval(timer);
+            });
+
+            oldHero.addEventListener("mouseleave", function () {
+                startSlider();
+            });
+
+            showSlide(0);
+            startSlider();
+        }
+
+
+        /* -----------------------------------------------------
+           MOVING BENEFIT CARDS
+           Created automatically below hero.
+        ----------------------------------------------------- */
+        const hero =
+            document.querySelector(".hero-slider") ||
+            document.querySelector(".hero");
+
+        if (
+            hero &&
+            !document.querySelector(".benefits-section")
+        ) {
+
+            const benefits = [
+                ["fa-tag", "NO HIDDEN COST", "Transparent pricing"],
+                ["fa-credit-card", "ZERO EMI", "Easy payment options"],
+                ["fa-city", "10+ CITIES", "Expanding across India"],
+                ["fa-award", "25+ YEARS", "Design experience"],
+                ["fa-circle-check", "100% QUALITY", "Premium workmanship"],
+                ["fa-heart", "100% HAPPY CLIENTS", "Client-first service"],
+                ["fa-house-circle-check", "250+ PROJECTS", "Successfully delivered"]
+            ];
+
+            const section =
+                document.createElement("section");
+
+            section.className =
+                "benefits-section";
+
+            const track =
+                document.createElement("div");
+
+            track.className =
+                "benefits-track";
+
+            /*
+             * Duplicate cards for seamless movement.
+             */
+            const allBenefits =
+                benefits.concat(benefits);
+
+            allBenefits.forEach(function (item) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "benefit-card";
+
+                card.innerHTML =
+                    '<i class="fa-solid ' + item[0] + '"></i>' +
+                    '<div>' +
+                    '<strong>' + item[1] + '</strong>' +
+                    '<span>' + item[2] + '</span>' +
+                    '</div>';
+
+                track.appendChild(card);
+            });
+
+            section.appendChild(track);
+
+            hero.insertAdjacentElement(
+                "afterend",
+                section
+            );
+        }
+
+
+        /* -----------------------------------------------------
+           ANIMATED COUNTERS
+        ----------------------------------------------------- */
+        const counters =
+            document.querySelectorAll(".counter");
+
+        function animateCounter(element) {
+
+            if (element.dataset.done === "1") {
                 return;
             }
 
-            counter.textContent = count;
+            element.dataset.done = "1";
 
-            requestAnimationFrame(updateCounter);
+            const target =
+                parseInt(element.dataset.target || "0", 10);
+
+            const original =
+                element.textContent.trim();
+
+            const suffix =
+                original.includes("%")
+                    ? "%"
+                    : original.includes("+")
+                        ? "+"
+                        : "";
+
+            const duration = 1400;
+            const start = performance.now();
+
+            function frame(now) {
+
+                const progress =
+                    Math.min(
+                        (now - start) / duration,
+                        1
+                    );
+
+                const eased =
+                    1 - Math.pow(1 - progress, 3);
+
+                const value =
+                    Math.floor(target * eased);
+
+                element.textContent =
+                    value.toLocaleString("en-IN") +
+                    suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(frame);
+                } else {
+                    element.textContent =
+                        target.toLocaleString("en-IN") +
+                        suffix;
+                }
+            }
+
+            requestAnimationFrame(frame);
         }
 
-        updateCounter();
-    });
-});
+        if (counters.length) {
 
+            if ("IntersectionObserver" in window) {
 
-// SERVICE GALLERY
+                const observer =
+                    new IntersectionObserver(
+                        function (entries, obs) {
 
-// SERVICE GALLERY
+                            entries.forEach(function (entry) {
 
-const modal = document.getElementById("designModal");
-const modalGallery = document.getElementById("modalGallery");
-const modalTitle = document.getElementById("modalTitle");
-const closeModal = document.querySelector(".close-modal");
+                                if (entry.isIntersecting) {
+                                    animateCounter(entry.target);
+                                    obs.unobserve(entry.target);
+                                }
 
-const designs = {
-    "bedroom-designs": {
-        title: "Bedroom",
-        images: [
-            "b4.jfif",
-            "b1.jfif",
-            "b2.webp",
-            "b3.jfif",
-            "b5.webp",
-            "images/bedroom5.jpg",
-            "images/bedroom6.jpg",
-            "images/bedroom7.jpg",
-            "images/bedroom8.jpg"
-        ]
-    },
+                            });
 
-    "kitchen-designs": {
-        title: "Kitchen",
-        images: [
-            "images/kitchen1.jpg",
-            "images/kitchen2.jpg",
-            "images/kitchen3.jpg",
-            "images/kitchen4.jpg",
-            "images/kitchen5.jpg",
-            "images/kitchen6.jpg",
-            "images/kitchen7.jpg",
-            "images/kitchen8.jpg"
-        ]
-    },
+                        },
+                        { threshold: 0.25 }
+                    );
 
-    "living-designs": {
-        title: "Living Room",
-        images: [
-            "images/living1.jpg",
-            "images/living2.jpg",
-            "images/living3.jpg",
-            "images/living4.jpg",
-            "images/living5.jpg",
-            "images/living6.jpg",
-            "images/living7.jpg",
-            "images/living8.jpg"
-        ]
-    },
+                counters.forEach(function (counter) {
+                    observer.observe(counter);
+                });
 
-    "tv-designs": {
-        title: "TV Unit",
-        images: [
-            "images/tv1.jpg",
-            "images/tv2.jpg",
-            "images/tv3.jpg",
-            "images/tv4.jpg",
-            "images/tv5.jpg",
-            "images/tv6.jpg",
-            "images/tv7.jpg",
-            "images/tv8.jpg"
-        ]
-    },
-
-    "wardrobe-designs": {
-        title: "Wardrobe",
-        images: [
-            "images/wardrobe1.jpg",
-            "images/wardrobe2.jpg",
-            "images/wardrobe3.jpg",
-            "images/wardrobe4.jpg",
-            "images/wardrobe5.jpg",
-            "images/wardrobe6.jpg",
-            "images/wardrobe7.jpg",
-            "images/wardrobe8.jpg"
-        ]
-    },
-
-    "exterior-designs": {
-        title: "Exterior",
-        images: [
-            "images/exterior1.jpg",
-            "images/exterior2.jpg",
-            "images/exterior3.jpg",
-            "images/exterior4.jpg",
-            "images/exterior5.jpg",
-            "images/exterior6.jpg",
-            "images/exterior7.jpg",
-            "images/exterior8.jpg"
-        ]
-    }
-};
-
-document.querySelectorAll(".service-btn").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        if (!modal) return;
-
-        modalGallery.innerHTML = "";
-
-        const section = designs[button.dataset.target];
-
-        if (!section) return;
-
-        modalTitle.textContent = section.title;
-
-        section.images.forEach((image, index) => {
-
-            modalGallery.innerHTML += `
-                <img 
-                    src="${image}" 
-                    alt="${section.title} ${index + 1}"
-                    loading="lazy"
-                >
-            `;
-
-        });
-
-        modal.style.display = "block";
-    });
-});
-
-if (closeModal && modal) {
-
-    closeModal.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-}
-
-// STYLE QUIZ
-
-document.querySelectorAll(".quiz-btn").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const result = document.getElementById("quizResult");
-
-        if (result) {
-            result.textContent =
-                "Your style: " + button.dataset.style;
+            } else {
+                counters.forEach(animateCounter);
+            }
         }
-    });
-});
 
 
-// QUOTE CALCULATOR
+        /* -----------------------------------------------------
+           SERVICE GALLERY MODAL
+        ----------------------------------------------------- */
+        const modal =
+            document.getElementById("designModal");
 
-const calculateBtn = document.getElementById("calculateBtn");
+        const modalGallery =
+            document.getElementById("modalGallery");
 
-if (calculateBtn) {
+        const modalTitle =
+            document.getElementById("modalTitle");
 
-    calculateBtn.addEventListener("click", () => {
+        const closeModal =
+            document.querySelector(".close-modal");
 
-        const area =
-            Number(document.getElementById("area").value);
+        const designs = {
 
-        const rate =
-            Number(document.getElementById("package").value);
+            "bedroom-designs": {
+                title: "Bedroom",
+                images: [
+                    "b4.jfif",
+                    "b1.jfif",
+                    "b2.webp",
+                    "b3.jfif",
+                    "b5.webp",
+                    "images/bedroom5.jpg",
+                    "images/bedroom6.jpg",
+                    "images/bedroom7.jpg",
+                    "images/bedroom8.jpg"
+                ]
+            },
 
-        const bedrooms =
-            Number(document.getElementById("bedrooms").value) * 50000;
+            "kitchen-designs": {
+                title: "Kitchen",
+                images: [
+                    "images/kitchen1.jpg",
+                    "images/kitchen2.jpg",
+                    "images/kitchen3.jpg",
+                    "images/kitchen4.jpg",
+                    "images/kitchen5.jpg",
+                    "images/kitchen6.jpg",
+                    "images/kitchen7.jpg",
+                    "images/kitchen8.jpg"
+                ]
+            },
 
-        const kitchens =
-            Number(document.getElementById("kitchens").value) * 100000;
+            "living-designs": {
+                title: "Living Room",
+                images: [
+                    "images/living1.jpg",
+                    "images/living2.jpg",
+                    "images/living3.jpg",
+                    "images/living4.jpg",
+                    "images/living5.jpg",
+                    "images/living6.jpg",
+                    "images/living7.jpg",
+                    "images/living8.jpg"
+                ]
+            },
 
-        const living =
-            Number(document.getElementById("living").value) * 40000;
+            "tv-designs": {
+                title: "TV Unit",
+                images: [
+                    "images/tv1.jpg",
+                    "images/tv2.jpg",
+                    "images/tv3.jpg",
+                    "images/tv4.jpg",
+                    "images/tv5.jpg",
+                    "images/tv6.jpg",
+                    "images/tv7.jpg",
+                    "images/tv8.jpg"
+                ]
+            },
 
-        const wardrobes =
-            Number(document.getElementById("wardrobes").value) * 25000;
+            "wardrobe-designs": {
+                title: "Wardrobe",
+                images: [
+                    "images/wardrobe1.jpg",
+                    "images/wardrobe2.jpg",
+                    "images/wardrobe3.jpg",
+                    "images/wardrobe4.jpg",
+                    "images/wardrobe5.jpg",
+                    "images/wardrobe6.jpg",
+                    "images/wardrobe7.jpg",
+                    "images/wardrobe8.jpg"
+                ]
+            },
 
-        const tvUnits =
-            Number(document.getElementById("tvUnits").value) * 30000;
+            "exterior-designs": {
+                title: "Exterior",
+                images: [
+                    "images/exterior1.jpg",
+                    "images/exterior2.jpg",
+                    "images/exterior3.jpg",
+                    "images/exterior4.jpg",
+                    "images/exterior5.jpg",
+                    "images/exterior6.jpg",
+                    "images/exterior7.jpg",
+                    "images/exterior8.jpg"
+                ]
+            }
+        };
 
-        const total =
-            area * rate +
-            bedrooms +
-            kitchens +
-            living +
-            wardrobes +
-            tvUnits;
+        document.querySelectorAll(".service-btn")
+            .forEach(function (button) {
 
-        document.getElementById("totalCost").textContent =
-            "₹" + total.toLocaleString("en-IN");
-    });
-}
+                button.addEventListener("click", function () {
+
+                    if (!modal || !modalGallery) return;
+
+                    const data =
+                        designs[button.dataset.target];
+
+                    if (!data) return;
+
+                    modalGallery.innerHTML = "";
+
+                    if (modalTitle) {
+                        modalTitle.textContent =
+                            data.title;
+                    }
+
+                    data.images.forEach(function (src, index) {
+
+                        const img =
+                            document.createElement("img");
+
+                        img.src = src;
+                        img.alt =
+                            data.title +
+                            " design " +
+                            (index + 1);
+
+                        img.loading = "lazy";
+
+                        modalGallery.appendChild(img);
+                    });
+
+                    modal.style.display = "block";
+                    document.body.style.overflow = "hidden";
+                });
+            });
+
+        function closeDesignModal() {
+
+            if (!modal) return;
+
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener(
+                "click",
+                closeDesignModal
+            );
+        }
+
+        if (modal) {
+
+            modal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (event.target === modal) {
+                        closeDesignModal();
+                    }
+
+                }
+            );
+        }
 
 
-// MEETING
+        /* -----------------------------------------------------
+           STYLE QUIZ
+        ----------------------------------------------------- */
+        document.querySelectorAll(".quiz-btn")
+            .forEach(function (button) {
 
-const meetingBtn = document.getElementById("meetingBtn");
+                button.addEventListener("click", function () {
 
-if (meetingBtn) {
+                    const result =
+                        document.getElementById("quizResult");
 
-    meetingBtn.addEventListener("click", () => {
+                    if (result) {
+                        result.textContent =
+                            "Your style: " +
+                            (button.dataset.style || "Modern");
+                    }
+                });
+            });
 
-        alert("Meeting request submitted.");
-    });
-}
+
+        /* -----------------------------------------------------
+           QUOTE CALCULATOR
+        ----------------------------------------------------- */
+        const calculateBtn =
+            document.getElementById("calculateBtn");
+
+        if (calculateBtn) {
+
+            calculateBtn.addEventListener(
+                "click",
+                function () {
+
+                    const getNumber = function (id) {
+
+                        const element =
+                            document.getElementById(id);
+
+                        return element
+                            ? Number(element.value) || 0
+                            : 0;
+                    };
+
+                    const area =
+                        getNumber("area");
+
+                    const rate =
+                        getNumber("package");
+
+                    const bedrooms =
+                        getNumber("bedrooms") * 50000;
+
+                    const kitchens =
+                        getNumber("kitchens") * 100000;
+
+                    const living =
+                        getNumber("living") * 40000;
+
+                    const wardrobes =
+                        getNumber("wardrobes") * 25000;
+
+                    const tvUnits =
+                        getNumber("tvUnits") * 30000;
+
+                    const total =
+                        area * rate +
+                        bedrooms +
+                        kitchens +
+                        living +
+                        wardrobes +
+                        tvUnits;
+
+                    const totalCost =
+                        document.getElementById("totalCost");
+
+                    if (totalCost) {
+                        totalCost.textContent =
+                            "₹" +
+                            total.toLocaleString("en-IN");
+                    }
+                }
+            );
+        }
 
 
-// CONTACT FORM
+        /* -----------------------------------------------------
+           MEETING
+        ----------------------------------------------------- */
+        const meetingBtn =
+            document.getElementById("meetingBtn");
 
-const scriptURL =
-    "https://script.google.com/macros/s/AKfycbxZOcFMR-E0szRcRDxwRb0yVDthwnqeEbiQIYAnx9FgAalNGCBy0HyJnkjl5SU-SMpW/exec";
+        if (meetingBtn) {
 
-const contactForm =
-    document.getElementById("contactForm");
+            meetingBtn.addEventListener(
+                "click",
+                function () {
+                    alert(
+                        "Meeting request submitted."
+                    );
+                }
+            );
+        }
 
-if (contactForm) {
 
-    contactForm.addEventListener("submit", function (e) {
+        /* -----------------------------------------------------
+           EXISTING CONTACT FORM
+           ----------------------------------------------------- */
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbxZOcFMR-E0szRcRDxwRb0yVDthwnqeEbiQIYAnx9FgAalNGCBy0HyJnkjl5SU-SMpW/exec";
 
-        e.preventDefault();
+        const contactForm =
+            document.getElementById("contactForm");
 
-        const submitBtn =
-            contactForm.querySelector(
-                "button[type='submit']"
+        if (contactForm) {
+
+            contactForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const submitBtn =
+                        contactForm.querySelector(
+                            "button[type='submit']"
+                        );
+
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent =
+                            "Sending...";
+                    }
+
+                    fetch(
+                        scriptURL,
+                        {
+                            method: "POST",
+                            body: new FormData(contactForm),
+                            mode: "no-cors"
+                        }
+                    )
+                    .then(function () {
+
+                        alert(
+                            "Message sent successfully!"
+                        );
+
+                        contactForm.reset();
+
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent =
+                                "Submit";
+                        }
+                    })
+                    .catch(function () {
+
+                        alert(
+                            "Submission failed. Please try again."
+                        );
+
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent =
+                                "Submit";
+                        }
+                    });
+                }
+            );
+        }
+
+
+        /* -----------------------------------------------------
+           DARK MODE
+        ----------------------------------------------------- */
+        const darkModeBtn =
+            document.querySelector(".dark-mode-btn");
+
+        if (darkModeBtn) {
+
+            const saved =
+                localStorage.getItem(
+                    "arInfraconDarkMode"
+                );
+
+            if (saved === "true") {
+                document.body.classList.add("dark");
+            }
+
+            darkModeBtn.addEventListener(
+                "click",
+                function () {
+
+                    const active =
+                        document.body.classList.toggle(
+                            "dark"
+                        );
+
+                    localStorage.setItem(
+                        "arInfraconDarkMode",
+                        active ? "true" : "false"
+                    );
+                }
+            );
+        }
+
+
+        /* -----------------------------------------------------
+           SCROLL TOP
+        ----------------------------------------------------- */
+        const scrollButton =
+            document.querySelector(".scroll-top");
+
+        if (scrollButton) {
+
+            function updateScrollTop() {
+
+                if (window.scrollY > 350) {
+                    scrollButton.classList.add("show");
+                } else {
+                    scrollButton.classList.remove("show");
+                }
+            }
+
+            window.addEventListener(
+                "scroll",
+                updateScrollTop,
+                { passive: true }
             );
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending...";
+            updateScrollTop();
 
-        const formData =
-            new FormData(contactForm);
+            scrollButton.addEventListener(
+                "click",
+                function () {
 
-        fetch(scriptURL, {
-            method: "POST",
-            body: formData,
-            mode: "no-cors"
-        })
-
-        .then(() => {
-
-            alert("Message sent successfully!");
-
-            contactForm.reset();
-
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Submit";
-        })
-
-        .catch(() => {
-
-            alert("Submission failed.");
-
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Submit";
-        });
-    });
-}
-
-
-// DARK MODE
-
-const darkModeBtn =
-    document.querySelector(".dark-mode-btn");
-
-if (darkModeBtn) {
-
-    darkModeBtn.addEventListener("click", () => {
-
-        document.body.classList.toggle("dark");
-    });
-}
-
-
-// SCROLL TO TOP
-
-const scrollButton =
-    document.querySelector(".scroll-top");
-
-if (scrollButton) {
-
-    window.addEventListener("scroll", () => {
-
-        if (window.scrollY > 300) {
-
-            scrollButton.classList.add("show");
-
-        } else {
-
-            scrollButton.classList.remove("show");
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }
+            );
         }
-    });
 
-    scrollButton.addEventListener("click", () => {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-}
-/* =========================================
-HERO IMAGE SLIDER
-========================================= */
+        /* -----------------------------------------------------
+           CONTACT POPUP
+           Created automatically - NO HTML CHANGE REQUIRED.
+           It appears once per browser and can be closed.
+        ----------------------------------------------------- */
+        if (
+            !document.getElementById("contactPopup") &&
+            document.body
+        ) {
 
-const heroSlides = document.querySelectorAll(".hero-slide");
-const heroDots = document.querySelectorAll(".hero-dot");
+            const popup =
+                document.createElement("div");
 
-let currentHeroSlide = 0;
+            popup.id = "contactPopup";
+            popup.className = "contact-popup";
 
-function showHeroSlide(index) {
+            popup.innerHTML = `
+                <div class="popup-box">
 
-```
-heroSlides.forEach((slide) => {
-    slide.classList.remove("active");
-});
+                    <button
+                        type="button"
+                        class="popup-close"
+                        id="closePopup"
+                        aria-label="Close"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
 
-heroDots.forEach((dot) => {
-    dot.classList.remove("active");
-});
+                    <div class="popup-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
+                            alt="Modern Interior"
+                        >
+                    </div>
 
-heroSlides[index].classList.add("active");
+                    <div class="popup-content">
 
-if (heroDots[index]) {
-    heroDots[index].classList.add("active");
-}
-```
+                        <span>AR INFRACON</span>
 
-}
+                        <h2>
+                            Let's Design Your Dream Home
+                        </h2>
 
-function nextHeroSlide() {
+                        <p>
+                            Get a free consultation with
+                            our interior design team.
+                        </p>
 
-```
-currentHeroSlide++;
+                        <form id="popupContactForm">
 
-if (currentHeroSlide >= heroSlides.length) {
-    currentHeroSlide = 0;
-}
+                            <input
+                                id="popupName"
+                                type="text"
+                                placeholder="Your Name"
+                                required
+                            >
 
-showHeroSlide(currentHeroSlide);
-```
+                            <input
+                                id="popupPhone"
+                                type="tel"
+                                placeholder="Phone Number"
+                                required
+                            >
 
-}
+                            <select
+                                id="popupService"
+                                required
+                            >
+                                <option value="">
+                                    Select Service
+                                </option>
+                                <option>Bedroom</option>
+                                <option>Modular Kitchen</option>
+                                <option>Living Room</option>
+                                <option>Wardrobe</option>
+                                <option>TV Unit</option>
+                                <option>Complete Home Interior</option>
+                                <option>Exterior Design</option>
+                            </select>
 
-/* Automatic slider every 5 seconds */
+                            <button type="submit">
+                                Get Free Consultation
+                            </button>
 
-if (heroSlides.length > 0) {
+                        </form>
 
-```
-setInterval(nextHeroSlide, 5000);
-```
+                        <a
+                            class="popup-whatsapp"
+                            href="https://wa.me/919119650333"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Chat on WhatsApp
+                        </a>
 
-}
+                    </div>
 
-/* Manual dots */
+                </div>
+            `;
 
-heroDots.forEach((dot, index) => {
+            document.body.appendChild(popup);
 
-```
-dot.addEventListener("click", () => {
 
-    currentHeroSlide = index;
+            const closePopup =
+                document.getElementById("closePopup");
 
-    showHeroSlide(currentHeroSlide);
+            function closeContactPopup() {
 
-});
-```
+                popup.classList.remove("show");
 
-});
+                localStorage.setItem(
+                    "arInfraconPopupClosed",
+                    "true"
+                );
 
-/* =========================================
-CONTACT POPUP
-========================================= */
+                document.body.style.overflow = "";
+            }
 
-const contactPopup = document.getElementById("contactPopup");
-const closePopup = document.getElementById("closePopup");
 
-/*
-Popup appears when visitor opens website.
+            if (closePopup) {
+                closePopup.addEventListener(
+                    "click",
+                    closeContactPopup
+                );
+            }
 
-After visitor closes it, localStorage remembers
-the choice so it doesn't keep appearing again.
-*/
 
-window.addEventListener("load", () => {
+            popup.addEventListener(
+                "click",
+                function (event) {
 
-```
-const popupClosed = localStorage.getItem("arInfraconPopupClosed");
+                    if (event.target === popup) {
+                        closeContactPopup();
+                    }
+                }
+            );
 
-if (!popupClosed) {
 
-    setTimeout(() => {
+            setTimeout(function () {
 
-        contactPopup.classList.add("show");
+                const closed =
+                    localStorage.getItem(
+                        "arInfraconPopupClosed"
+                    );
 
-    }, 1200);
+                if (!closed) {
 
-}
-```
+                    popup.classList.add("show");
+                    document.body.style.overflow =
+                        "hidden";
+                }
 
-});
+            }, 1200);
 
-/* Close popup */
 
-if (closePopup) {
+            const popupForm =
+                document.getElementById(
+                    "popupContactForm"
+                );
 
-```
-closePopup.addEventListener("click", () => {
+            if (popupForm) {
 
-    contactPopup.classList.remove("show");
+                popupForm.addEventListener(
+                    "submit",
+                    function (event) {
 
-    localStorage.setItem(
-        "arInfraconPopupClosed",
-        "true"
-    );
+                        event.preventDefault();
 
-});
-```
+                        const name =
+                            document.getElementById(
+                                "popupName"
+                            ).value.trim();
 
-}
+                        const phone =
+                            document.getElementById(
+                                "popupPhone"
+                            ).value.trim();
 
-/* Close by clicking outside popup */
+                        const service =
+                            document.getElementById(
+                                "popupService"
+                            ).value;
 
-if (contactPopup) {
+                        const message =
+                            "Hello AR Infracon,\n\n" +
+                            "Name: " + name + "\n" +
+                            "Phone: " + phone + "\n" +
+                            "Service: " + service +
+                            "\n\n" +
+                            "I would like a free consultation.";
 
-```
-contactPopup.addEventListener("click", (event) => {
+                        const url =
+                            "https://wa.me/919119650333?text=" +
+                            encodeURIComponent(message);
 
-    if (event.target === contactPopup) {
+                        window.open(
+                            url,
+                            "_blank",
+                            "noopener"
+                        );
 
-        contactPopup.classList.remove("show");
+                        closeContactPopup();
+                    }
+                );
+            }
+        }
 
-        localStorage.setItem(
-            "arInfraconPopupClosed",
-            "true"
+
+        /* -----------------------------------------------------
+           ESC KEY
+        ----------------------------------------------------- */
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key !== "Escape") {
+                    return;
+                }
+
+                const popup =
+                    document.getElementById(
+                        "contactPopup"
+                    );
+
+                if (
+                    popup &&
+                    popup.classList.contains("show")
+                ) {
+                    popup.classList.remove("show");
+                    document.body.style.overflow = "";
+                }
+
+                if (modal) {
+                    closeDesignModal();
+                }
+            }
         );
 
-    }
-
-});
-```
-
-}
-
-/* =========================================
-POPUP CONTACT FORM
-========================================= */
-
-const popupForm = document.getElementById("popupContactForm");
-
-if (popupForm) {
-
-```
-popupForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    const name =
-        document.getElementById("popupName").value;
-
-    const phone =
-        document.getElementById("popupPhone").value;
-
-    const service =
-        document.getElementById("popupService").value;
-
-
-    const message =
-        `Hello AR Infracon,%0A%0A` +
-        `Name: ${name}%0A` +
-        `Phone: ${phone}%0A` +
-        `Service: ${service}%0A%0A` +
-        `I would like a free consultation.`;
-
-
-    window.open(
-        `https://wa.me/91119650333?text=${message}`,
-        "_blank"
-    );
-
-});
-```
-
-}
-
-/* =========================================
-SCROLL TOP
-========================================= */
-
-const scrollTopButton =
-document.querySelector(".scroll-top");
-
-if (scrollTopButton) {
-
-```
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 400) {
-
-        scrollTopButton.classList.add("show");
-
-    } else {
-
-        scrollTopButton.classList.remove("show");
-
-    }
-
-});
-
-
-scrollTopButton.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
     });
 
-});
-```
-
-}
-
-/* =========================================
-DARK MODE
-========================================= */
-
-const darkModeButton =
-document.querySelector(".dark-mode-btn");
-
-if (darkModeButton) {
-
-```
-darkModeButton.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark-mode");
-
-});
-```
-
-}
-
+})();
