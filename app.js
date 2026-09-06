@@ -44,172 +44,157 @@
 
         /* -----------------------------------------------------
            HOMEPAGE HERO SLIDER
-           Created from the existing .hero element.
-           This means index.html links do NOT need changing.
+           Uses the existing .hero-slider HTML.
+           Existing image URLs, buttons and page links are preserved.
         ----------------------------------------------------- */
-        const oldHero = document.querySelector(".hero");
+        const heroSlider = document.querySelector(".hero-slider");
 
-        if (oldHero && !oldHero.classList.contains("hero-slider")) {
+        if (heroSlider) {
+            const slides = Array.from(heroSlider.querySelectorAll(".hero-slide"));
+            const dots = Array.from(heroSlider.querySelectorAll(".hero-dot"));
 
-            const images = [
-                "https://static.vecteezy.com/system/resources/thumbnails/043/500/990/small/modern-living-room-design-with-gallery-wall-fresh-clean-light-contemporary-room-interior-photo.jpg",
-                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85",
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85",
-                "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1800&q=85"
-            ];
-
-            oldHero.classList.add("hero-slider");
-
-            const existingOverlay = oldHero.querySelector(".hero-overlay");
-
-            /*
-             * The existing hero content is kept.
-             * We move it into the first slide so the existing
-             * buttons and links continue to work.
-             */
-            const content =
-                oldHero.querySelector(".hero-content");
-
-            oldHero.innerHTML = "";
-
-            const slides = [];
-            const dots = [];
-
-            images.forEach(function (image, index) {
-
-                const slide =
-                    document.createElement("div");
-
-                slide.className =
-                    "hero-slide" +
-                    (index === 0 ? " active" : "");
-
-                const img =
-                    document.createElement("img");
-
-                img.src = image;
-                img.alt =
-                    "AR Infracon Interior Design " +
-                    (index + 1);
-
-                slide.appendChild(img);
-
-                if (index === 0 && content) {
-                    slide.appendChild(content);
-                }
-
-                const overlay =
-                    document.createElement("div");
-
-                overlay.className =
-                    "hero-overlay";
-
-                slide.appendChild(overlay);
-
-                /*
-                 * Put content above the overlay.
-                 */
-                if (index === 0 && content) {
-                    slide.appendChild(content);
-                }
-
-                oldHero.appendChild(slide);
-                slides.push(slide);
-            });
-
-            /*
-             * Fix the first slide so the original content appears
-             * only once and above the overlay.
-             */
-            if (content) {
-                const firstSlide = slides[0];
-                firstSlide.appendChild(content);
-            }
-
-            const dotsWrap =
-                document.createElement("div");
-
-            dotsWrap.className =
-                "hero-dots";
-
-            images.forEach(function (_, index) {
-
-                const dot =
-                    document.createElement("button");
-
-                dot.type = "button";
-                dot.className =
-                    "hero-dot" +
-                    (index === 0 ? " active" : "");
-
-                dot.setAttribute(
-                    "aria-label",
-                    "Show interior image " + (index + 1)
+            if (slides.length) {
+                let currentSlide = Math.max(
+                    0,
+                    slides.findIndex(function (slide) {
+                        return slide.classList.contains("active");
+                    })
                 );
 
-                dotsWrap.appendChild(dot);
-                dots.push(dot);
-            });
+                let sliderTimer = null;
+                let touchStartX = 0;
+                let touchEndX = 0;
 
-            oldHero.appendChild(dotsWrap);
+                /* Create navigation arrows only if they do not already exist. */
+                let prevButton = heroSlider.querySelector(".hero-prev");
+                let nextButton = heroSlider.querySelector(".hero-next");
 
-            let current = 0;
-            let timer = null;
+                if (!prevButton) {
+                    prevButton = document.createElement("button");
+                    prevButton.type = "button";
+                    prevButton.className = "hero-arrow hero-prev";
+                    prevButton.setAttribute("aria-label", "Previous slide");
+                    prevButton.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+                    heroSlider.appendChild(prevButton);
+                }
 
-            function showSlide(index) {
+                if (!nextButton) {
+                    nextButton = document.createElement("button");
+                    nextButton.type = "button";
+                    nextButton.className = "hero-arrow hero-next";
+                    nextButton.setAttribute("aria-label", "Next slide");
+                    nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+                    heroSlider.appendChild(nextButton);
+                }
 
-                if (!slides.length) return;
+                function showSlide(index) {
+                    if (!slides.length) return;
 
-                current =
-                    (index + slides.length) %
-                    slides.length;
+                    currentSlide = (index + slides.length) % slides.length;
 
-                slides.forEach(function (slide, i) {
-                    slide.classList.toggle(
-                        "active",
-                        i === current
-                    );
-                });
+                    slides.forEach(function (slide, i) {
+                        slide.classList.toggle("active", i === currentSlide);
+                        slide.setAttribute("aria-hidden", i === currentSlide ? "false" : "true");
+                    });
 
-                dots.forEach(function (dot, i) {
-                    dot.classList.toggle(
-                        "active",
-                        i === current
-                    );
-                });
-            }
+                    dots.forEach(function (dot, i) {
+                        dot.classList.toggle("active", i === currentSlide);
+                        dot.setAttribute("aria-current", i === currentSlide ? "true" : "false");
+                    });
+                }
 
-            function startSlider() {
+                function stopSlider() {
+                    if (sliderTimer) {
+                        clearInterval(sliderTimer);
+                        sliderTimer = null;
+                    }
+                }
 
-                clearInterval(timer);
+                function startSlider() {
+                    stopSlider();
 
-                timer = setInterval(function () {
-                    showSlide(current + 1);
-                }, 5000);
-            }
+                    if (slides.length > 1) {
+                        sliderTimer = setInterval(function () {
+                            showSlide(currentSlide + 1);
+                        }, 5000);
+                    }
+                }
 
-            dots.forEach(function (dot, index) {
-
-                dot.addEventListener("click", function () {
-                    showSlide(index);
+                function restartSlider() {
                     startSlider();
+                }
+
+                if (prevButton) {
+                    prevButton.addEventListener("click", function () {
+                        showSlide(currentSlide - 1);
+                        restartSlider();
+                    });
+                }
+
+                if (nextButton) {
+                    nextButton.addEventListener("click", function () {
+                        showSlide(currentSlide + 1);
+                        restartSlider();
+                    });
+                }
+
+                dots.forEach(function (dot, index) {
+                    dot.type = "button";
+                    dot.setAttribute("role", "button");
+                    dot.setAttribute("tabindex", "0");
+                    dot.addEventListener("click", function () {
+                        showSlide(index);
+                        restartSlider();
+                    });
+
+                    dot.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            showSlide(index);
+                            restartSlider();
+                        }
+                    });
                 });
 
-            });
+                heroSlider.addEventListener("mouseenter", stopSlider);
+                heroSlider.addEventListener("mouseleave", startSlider);
+                heroSlider.addEventListener("focusin", stopSlider);
+                heroSlider.addEventListener("focusout", function () {
+                    if (!heroSlider.contains(document.activeElement)) {
+                        startSlider();
+                    }
+                });
 
-            oldHero.addEventListener("mouseenter", function () {
-                clearInterval(timer);
-            });
+                heroSlider.addEventListener(
+                    "touchstart",
+                    function (event) {
+                        touchStartX = event.changedTouches[0].screenX;
+                    },
+                    { passive: true }
+                );
 
-            oldHero.addEventListener("mouseleave", function () {
+                heroSlider.addEventListener(
+                    "touchend",
+                    function (event) {
+                        touchEndX = event.changedTouches[0].screenX;
+                        const distance = touchEndX - touchStartX;
+
+                        if (Math.abs(distance) > 50) {
+                            if (distance < 0) {
+                                showSlide(currentSlide + 1);
+                            } else {
+                                showSlide(currentSlide - 1);
+                            }
+                            restartSlider();
+                        }
+                    },
+                    { passive: true }
+                );
+
+                showSlide(currentSlide);
                 startSlider();
-            });
-
-            showSlide(0);
-            startSlider();
+            }
         }
-
 
         /* -----------------------------------------------------
            MOVING BENEFIT CARDS
@@ -788,212 +773,86 @@
 
         /* -----------------------------------------------------
            CONTACT POPUP
-           Created automatically - NO HTML CHANGE REQUIRED.
-           It appears once per browser and can be closed.
+           Uses the existing HTML popup when available.
+           Shows again after 24 hours on the same browser/device.
         ----------------------------------------------------- */
-        if (
-            !document.getElementById("contactPopup") &&
-            document.body
-        ) {
+        const contactPopup = document.getElementById("contactPopup");
+        const POPUP_STORAGE_KEY = "arInfraconPopupNextShow";
+        const POPUP_INTERVAL = 24 * 60 * 60 * 1000;
 
-            const popup =
-                document.createElement("div");
+        function closeContactPopup() {
+            if (!contactPopup) return;
 
-            popup.id = "contactPopup";
-            popup.className = "contact-popup";
+            contactPopup.classList.remove("show");
+            document.body.style.overflow = "";
 
-            popup.innerHTML = `
-                <div class="popup-box">
-
-                    <button
-                        type="button"
-                        class="popup-close"
-                        id="closePopup"
-                        aria-label="Close"
-                    >
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-
-                    <div class="popup-image">
-                        <img
-                            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
-                            alt="Modern Interior"
-                        >
-                    </div>
-
-                    <div class="popup-content">
-
-                        <span>AR INFRACON</span>
-
-                        <h2>
-                            Let's Design Your Dream Home
-                        </h2>
-
-                        <p>
-                            Get a free consultation with
-                            our interior design team.
-                        </p>
-
-                        <form id="popupContactForm">
-
-                            <input
-                                id="popupName"
-                                type="text"
-                                placeholder="Your Name"
-                                required
-                            >
-
-                            <input
-                                id="popupPhone"
-                                type="tel"
-                                placeholder="Phone Number"
-                                required
-                            >
-
-                            <select
-                                id="popupService"
-                                required
-                            >
-                                <option value="">
-                                    Select Service
-                                </option>
-                                <option>Bedroom</option>
-                                <option>Modular Kitchen</option>
-                                <option>Living Room</option>
-                                <option>Wardrobe</option>
-                                <option>TV Unit</option>
-                                <option>Complete Home Interior</option>
-                                <option>Exterior Design</option>
-                            </select>
-
-                            <button type="submit">
-                                Get Free Consultation
-                            </button>
-
-                        </form>
-
-                        <a
-                            class="popup-whatsapp"
-                            href="https://wa.me/919119650333"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fa-brands fa-whatsapp"></i>
-                            Chat on WhatsApp
-                        </a>
-
-                    </div>
-
-                </div>
-            `;
-
-            document.body.appendChild(popup);
-
-
-            const closePopup =
-                document.getElementById("closePopup");
-
-            function closeContactPopup() {
-
-                popup.classList.remove("show");
-
-                localStorage.setItem(
-                    "arInfraconPopupClosed",
-                    "true"
-                );
-
-                document.body.style.overflow = "";
-            }
-
-
-            if (closePopup) {
-                closePopup.addEventListener(
-                    "click",
-                    closeContactPopup
-                );
-            }
-
-
-            popup.addEventListener(
-                "click",
-                function (event) {
-
-                    if (event.target === popup) {
-                        closeContactPopup();
-                    }
-                }
+            localStorage.setItem(
+                POPUP_STORAGE_KEY,
+                String(Date.now() + POPUP_INTERVAL)
             );
-
-
-            setTimeout(function () {
-
-                const closed =
-                    localStorage.getItem(
-                        "arInfraconPopupClosed"
-                    );
-
-                if (!closed) {
-
-                    popup.classList.add("show");
-                    document.body.style.overflow =
-                        "hidden";
-                }
-
-            }, 1200);
-
-
-            const popupForm =
-                document.getElementById(
-                    "popupContactForm"
-                );
-
-            if (popupForm) {
-
-                popupForm.addEventListener(
-                    "submit",
-                    function (event) {
-
-                        event.preventDefault();
-
-                        const name =
-                            document.getElementById(
-                                "popupName"
-                            ).value.trim();
-
-                        const phone =
-                            document.getElementById(
-                                "popupPhone"
-                            ).value.trim();
-
-                        const service =
-                            document.getElementById(
-                                "popupService"
-                            ).value;
-
-                        const message =
-                            "Hello AR Infracon,\n\n" +
-                            "Name: " + name + "\n" +
-                            "Phone: " + phone + "\n" +
-                            "Service: " + service +
-                            "\n\n" +
-                            "I would like a free consultation.";
-
-                        const url =
-                            "https://wa.me/919119650333?text=" +
-                            encodeURIComponent(message);
-
-                        window.open(
-                            url,
-                            "_blank",
-                            "noopener"
-                        );
-
-                        closeContactPopup();
-                    }
-                );
-            }
         }
 
+        function showContactPopup() {
+            if (!contactPopup) return;
+
+            contactPopup.classList.add("show");
+            document.body.style.overflow = "hidden";
+        }
+
+        if (contactPopup) {
+            const closePopup = document.getElementById("closePopup");
+
+            if (closePopup) {
+                closePopup.addEventListener("click", closeContactPopup);
+            }
+
+            contactPopup.addEventListener("click", function (event) {
+                if (event.target === contactPopup) {
+                    closeContactPopup();
+                }
+            });
+
+            /* Show only when the 24-hour cooldown has expired. */
+            const nextShowTime = Number(
+                localStorage.getItem(POPUP_STORAGE_KEY) || "0"
+            );
+
+            if (!Number.isFinite(nextShowTime) || Date.now() >= nextShowTime) {
+                setTimeout(showContactPopup, 1200);
+            }
+
+            const popupForm = document.getElementById("popupContactForm");
+
+            if (popupForm) {
+                popupForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    const nameElement = document.getElementById("popupName");
+                    const phoneElement = document.getElementById("popupPhone");
+                    const serviceElement = document.getElementById("popupService");
+
+                    const name = nameElement ? nameElement.value.trim() : "";
+                    const phone = phoneElement ? phoneElement.value.trim() : "";
+                    const service = serviceElement ? serviceElement.value : "";
+
+                    const message =
+                        "Hello AR Infracon,\n\n" +
+                        "Name: " + name + "\n" +
+                        "Phone: " + phone + "\n" +
+                        "Service: " + service + "\n\n" +
+                        "I would like a free consultation.";
+
+                    const url =
+                        "https://wa.me/919119650333?text=" +
+                        encodeURIComponent(message);
+
+                    /* Start the 24-hour cooldown before opening WhatsApp. */
+                    closeContactPopup();
+
+                    window.open(url, "_blank", "noopener,noreferrer");
+                });
+            }
+        }
 
         /* -----------------------------------------------------
            ESC KEY
@@ -1015,8 +874,7 @@
                     popup &&
                     popup.classList.contains("show")
                 ) {
-                    popup.classList.remove("show");
-                    document.body.style.overflow = "";
+                    closeContactPopup();
                 }
 
                 if (modal) {
