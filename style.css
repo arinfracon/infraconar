@@ -321,6 +321,50 @@ textarea {
 }
 
 /* =========================================================
+   HERO SLIDER CONTROLS / TOUCH
+   ========================================================= */
+
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.hero-arrow:hover {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.hero-prev {
+    left: 24px;
+}
+
+.hero-next {
+    right: 24px;
+}
+
+.hero-slider .hero-dot {
+    appearance: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-slider {
+    touch-action: pan-y;
+}
+
+/* =========================================================
    MOVING BENEFIT CARDS
    ========================================================= */
 
@@ -635,14 +679,15 @@ textarea {
     flex: 0 0 130px;
     display: block;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.72;
-    transition: filter 0.25s ease, opacity 0.25s ease;
+    filter: none;
+    opacity: 1;
+    transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .slide-track img:hover {
-    filter: grayscale(0);
+    filter: none;
     opacity: 1;
+    transform: scale(1.04);
 }
 
 @keyframes brandScroll {
@@ -1273,6 +1318,17 @@ summary {
 }
 
 /* =========================================================
+   CLEAN GENERATED / PSEUDO ELEMENTS
+   ========================================================= */
+
+.contact-popup,
+.contact-popup *,
+.hero-slider,
+.hero-slider * {
+    text-decoration: none;
+}
+
+/* =========================================================
    DARK MODE
    ========================================================= */
 
@@ -1493,6 +1549,20 @@ body.dark textarea {
     .hero-dots {
         left: 20px;
         bottom: 22px;
+    }
+
+    .hero-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .hero-prev {
+        left: 10px;
+    }
+
+    .hero-next {
+        right: 10px;
     }
 
     .stats {
