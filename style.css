@@ -66,8 +66,8 @@ textarea {
 
 .logo img {
     display: block;
-    width: auto;
-    height: 250px;
+    width: 250px;
+    height: auto;
     object-fit: contain;
 }
 
