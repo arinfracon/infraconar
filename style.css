@@ -998,3 +998,686 @@ body.dark .meeting-box {
         transform: scale(.85);
     }
 }
+/* =========================================
+HERO IMAGE SLIDER
+========================================= */
+
+.hero-slider {
+position: relative;
+width: 100%;
+height: 720px;
+overflow: hidden;
+}
+
+.hero-slide {
+position: absolute;
+inset: 0;
+opacity: 0;
+visibility: hidden;
+transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+opacity: 1;
+visibility: visible;
+}
+
+.hero-slide > img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center;
+}
+
+.hero-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(
+90deg,
+rgba(0,0,0,.72),
+rgba(0,0,0,.35),
+rgba(0,0,0,.15)
+);
+}
+
+.hero-content {
+position: absolute;
+z-index: 3;
+top: 50%;
+left: 8%;
+transform: translateY(-50%);
+max-width: 720px;
+color: #fff;
+}
+
+.hero-content span {
+font-size: 14px;
+font-weight: 700;
+letter-spacing: 3px;
+}
+
+.hero-content h1 {
+font-size: clamp(38px, 5vw, 70px);
+line-height: 1.08;
+margin: 20px 0;
+}
+
+.hero-content p {
+font-size: 17px;
+line-height: 1.8;
+max-width: 650px;
+}
+
+.hero-buttons {
+display: flex;
+gap: 15px;
+margin-top: 30px;
+flex-wrap: wrap;
+}
+
+.hero-buttons a {
+padding: 14px 25px;
+border-radius: 5px;
+text-decoration: none;
+font-weight: 600;
+}
+
+.hero-buttons a:first-child {
+background: #fff;
+color: #111;
+}
+
+.hero-buttons a:last-child {
+border: 1px solid #fff;
+color: #fff;
+}
+
+.hero-dots {
+position: absolute;
+z-index: 10;
+bottom: 35px;
+left: 8%;
+display: flex;
+gap: 10px;
+}
+
+.hero-dot {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: rgba(255,255,255,.5);
+cursor: pointer;
+}
+
+.hero-dot.active {
+width: 30px;
+border-radius: 10px;
+background: #fff;
+}
+
+/* =========================================
+MOVING BENEFIT CARDS
+========================================= */
+
+.benefits-section {
+overflow: hidden;
+padding: 20px 0;
+background: #fff;
+border-bottom: 1px solid #eee;
+}
+
+.benefits-track {
+display: flex;
+width: max-content;
+gap: 18px;
+animation: benefitsScroll 35s linear infinite;
+}
+
+.benefit-card {
+width: 260px;
+min-height: 85px;
+padding: 15px 20px;
+display: flex;
+align-items: center;
+gap: 15px;
+border: 1px solid #e8e8e8;
+border-radius: 12px;
+background: #fff;
+box-shadow: 0 8px 25px rgba(0,0,0,.06);
+flex-shrink: 0;
+}
+
+.benefit-card i {
+width: 48px;
+height: 48px;
+display: grid;
+place-items: center;
+border-radius: 50%;
+background: #111;
+color: #fff;
+font-size: 18px;
+}
+
+.benefit-card strong {
+display: block;
+font-size: 15px;
+}
+
+.benefit-card span {
+display: block;
+margin-top: 4px;
+color: #777;
+font-size: 12px;
+}
+
+@keyframes benefitsScroll {
+
+```
+from {
+    transform: translateX(0);
+}
+
+to {
+    transform: translateX(-50%);
+}
+```
+
+}
+
+/* =========================================
+STATS
+========================================= */
+
+.stats {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+padding: 70px 7%;
+background: #f8f8f8;
+}
+
+.stat-card {
+text-align: center;
+padding: 35px 20px;
+background: #fff;
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.stat-card h2 {
+font-size: 42px;
+margin: 0;
+}
+
+.stat-card p {
+color: #777;
+margin-top: 8px;
+}
+
+/* =========================================
+DESIGN SECTION
+========================================= */
+
+.design-section {
+padding: 100px 7%;
+}
+
+.section-title {
+text-align: center;
+max-width: 750px;
+margin: 0 auto 50px;
+}
+
+.section-title span {
+font-size: 13px;
+font-weight: 700;
+letter-spacing: 3px;
+}
+
+.section-title h2 {
+font-size: clamp(32px, 4vw, 50px);
+margin: 12px 0;
+}
+
+.section-title p {
+color: #777;
+line-height: 1.7;
+}
+
+.design-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 22px;
+}
+
+.design-card {
+position: relative;
+height: 450px;
+overflow: hidden;
+border-radius: 14px;
+text-decoration: none;
+color: #fff;
+}
+
+.design-card img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform .7s ease;
+}
+
+.design-card::after {
+content: "";
+position: absolute;
+inset: 0;
+background: linear-gradient(
+transparent 35%,
+rgba(0,0,0,.85)
+);
+}
+
+.design-card:hover img {
+transform: scale(1.08);
+}
+
+.design-card-content {
+position: absolute;
+z-index: 2;
+bottom: 25px;
+left: 25px;
+right: 20px;
+}
+
+.design-card-content h3 {
+font-size: 25px;
+margin: 0 0 5px;
+}
+
+.design-card-content p {
+margin: 0 0 15px;
+opacity: .85;
+}
+
+.design-card-content span {
+font-size: 13px;
+font-weight: 600;
+}
+
+/* =========================================
+CTA
+========================================= */
+
+.home-cta {
+padding: 110px 7%;
+background: #111;
+color: #fff;
+text-align: center;
+}
+
+.home-cta-content {
+max-width: 850px;
+margin: auto;
+}
+
+.home-cta span {
+font-size: 13px;
+letter-spacing: 3px;
+font-weight: 600;
+}
+
+.home-cta h2 {
+font-size: clamp(35px, 5vw, 58px);
+line-height: 1.15;
+margin: 18px 0;
+}
+
+.home-cta p {
+max-width: 650px;
+margin: auto;
+color: #bbb;
+line-height: 1.8;
+}
+
+.cta-buttons {
+margin-top: 35px;
+display: flex;
+justify-content: center;
+gap: 15px;
+flex-wrap: wrap;
+}
+
+.cta-buttons a {
+text-decoration: none;
+padding: 15px 25px;
+border-radius: 5px;
+background: #fff;
+color: #111;
+font-weight: 600;
+}
+
+.cta-buttons a:last-child {
+background: #25D366;
+color: #fff;
+}
+
+/* =========================================
+BRANDS
+========================================= */
+
+.brands {
+padding: 90px 0;
+overflow: hidden;
+}
+
+.slider {
+overflow: hidden;
+width: 100%;
+}
+
+.slide-track {
+display: flex;
+align-items: center;
+width: max-content;
+gap: 70px;
+animation: brandScroll 25s linear infinite;
+}
+
+.slide-track img {
+width: 130px;
+height: 65px;
+object-fit: contain;
+filter: grayscale(100%);
+opacity: .7;
+}
+
+.slide-track img:hover {
+filter: grayscale(0);
+opacity: 1;
+}
+
+@keyframes brandScroll {
+
+```
+from {
+    transform: translateX(0);
+}
+
+to {
+    transform: translateX(-50%);
+}
+```
+
+}
+
+/* =========================================
+CONTACT POPUP
+========================================= */
+
+.contact-popup {
+position: fixed;
+z-index: 99999;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+background: rgba(0,0,0,.72);
+backdrop-filter: blur(5px);
+opacity: 0;
+visibility: hidden;
+transition: .35s ease;
+}
+
+.contact-popup.show {
+opacity: 1;
+visibility: visible;
+}
+
+.popup-box {
+position: relative;
+display: grid;
+grid-template-columns: 1fr 1fr;
+width: min(900px, 100%);
+max-height: 90vh;
+overflow: hidden;
+border-radius: 18px;
+background: #fff;
+box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+
+.popup-image {
+min-height: 550px;
+}
+
+.popup-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.popup-content {
+padding: 45px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+
+.popup-content > span {
+font-size: 12px;
+letter-spacing: 3px;
+font-weight: 700;
+}
+
+.popup-content h2 {
+font-size: 36px;
+line-height: 1.15;
+margin: 15px 0;
+}
+
+.popup-content p {
+color: #777;
+line-height: 1.7;
+}
+
+.popup-close {
+position: absolute;
+z-index: 5;
+top: 15px;
+right: 15px;
+width: 38px;
+height: 38px;
+border: 0;
+border-radius: 50%;
+background: rgba(0,0,0,.75);
+color: #fff;
+cursor: pointer;
+font-size: 18px;
+}
+
+#popupContactForm {
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 15px;
+}
+
+#popupContactForm input,
+#popupContactForm select {
+width: 100%;
+padding: 14px;
+border: 1px solid #ddd;
+border-radius: 6px;
+outline: none;
+font-family: inherit;
+}
+
+#popupContactForm button {
+border: 0;
+padding: 15px;
+border-radius: 6px;
+background: #111;
+color: #fff;
+font-family: inherit;
+font-weight: 600;
+cursor: pointer;
+}
+
+.popup-whatsapp {
+margin-top: 12px;
+text-align: center;
+padding: 12px;
+text-decoration: none;
+border-radius: 6px;
+background: #25D366;
+color: #fff;
+font-weight: 600;
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+```
+.hero-slider {
+    height: 620px;
+}
+
+.hero-content {
+    left: 6%;
+    right: 6%;
+}
+
+.stats {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 50px 5%;
+}
+
+.design-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.popup-box {
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.popup-image {
+    min-height: 220px;
+    max-height: 250px;
+}
+
+.popup-content {
+    padding: 30px;
+}
+```
+
+}
+
+@media (max-width: 600px) {
+
+```
+.hero-slider {
+    height: 600px;
+}
+
+.hero-slide > img {
+    object-position: center;
+}
+
+.hero-content {
+    left: 22px;
+    right: 22px;
+}
+
+.hero-content h1 {
+    font-size: 34px;
+}
+
+.hero-content p {
+    font-size: 14px;
+}
+
+.hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-buttons a {
+    width: auto;
+    padding: 12px 18px;
+}
+
+.benefit-card {
+    width: 230px;
+}
+
+.stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 40px 15px;
+}
+
+.stat-card {
+    padding: 25px 10px;
+}
+
+.stat-card h2 {
+    font-size: 30px;
+}
+
+.stat-card p {
+    font-size: 12px;
+}
+
+.design-section {
+    padding: 70px 15px;
+}
+
+.design-grid {
+    grid-template-columns: 1fr;
+}
+
+.design-card {
+    height: 400px;
+}
+
+.home-cta {
+    padding: 75px 20px;
+}
+
+.brands {
+    padding: 65px 0;
+}
+
+.slide-track {
+    gap: 40px;
+}
+
+.slide-track img {
+    width: 100px;
+    height: 55px;
+}
+
+.popup-box {
+    border-radius: 12px;
+}
+
+.popup-image {
+    min-height: 180px;
+    max-height: 180px;
+}
+
+.popup-content {
+    padding: 25px 20px;
+}
+
+.popup-content h2 {
+    font-size: 28px;
+}
+```
+
+}
+
