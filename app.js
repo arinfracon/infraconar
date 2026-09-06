@@ -773,23 +773,16 @@
 
         /* -----------------------------------------------------
            CONTACT POPUP
-           Uses the existing HTML popup when available.
-           Shows again after 24 hours on the same browser/device.
+           Shows every time the website/page is opened.
+           No 24-hour localStorage cooldown is used.
         ----------------------------------------------------- */
         const contactPopup = document.getElementById("contactPopup");
-        const POPUP_STORAGE_KEY = "arInfraconPopupNextShow";
-        const POPUP_INTERVAL = 24 * 60 * 60 * 1000;
 
         function closeContactPopup() {
             if (!contactPopup) return;
 
             contactPopup.classList.remove("show");
             document.body.style.overflow = "";
-
-            localStorage.setItem(
-                POPUP_STORAGE_KEY,
-                String(Date.now() + POPUP_INTERVAL)
-            );
         }
 
         function showContactPopup() {
@@ -812,14 +805,8 @@
                 }
             });
 
-            /* Show only when the 24-hour cooldown has expired. */
-            const nextShowTime = Number(
-                localStorage.getItem(POPUP_STORAGE_KEY) || "0"
-            );
-
-            if (!Number.isFinite(nextShowTime) || Date.now() >= nextShowTime) {
-                setTimeout(showContactPopup, 1200);
-            }
+            /* Always show the popup whenever this page is opened/refreshed. */
+            setTimeout(showContactPopup, 1200);
 
             const popupForm = document.getElementById("popupContactForm");
 
@@ -846,9 +833,7 @@
                         "https://wa.me/919119650333?text=" +
                         encodeURIComponent(message);
 
-                    /* Start the 24-hour cooldown before opening WhatsApp. */
                     closeContactPopup();
-
                     window.open(url, "_blank", "noopener,noreferrer");
                 });
             }
