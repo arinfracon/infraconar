@@ -497,14 +497,30 @@
             "tv-designs": {
                 title: "TV Unit",
                 images: [
-                    "images/tv1.jpg",
-                    "images/tv2.jpg",
-                    "images/tv3.jpg",
-                    "images/tv4.jpg",
-                    "images/tv5.jpg",
-                    "images/tv6.jpg",
-                    "images/tv7.jpg",
-                    "images/tv8.jpg"
+                    "t1.jpg",
+                    "t2.jpg",
+                    "t3.jpg",
+                    "t4.jpg",
+                    "t5.jpg",
+                    "t6.jpg",
+                    "t7.jpg",
+                   "t8.jpg",
+                   "t9.jpg",
+                   "t10.jpg",
+                   "t11.jpg",
+                   "t12.jpg",
+                   "t13.jpg",
+                   "t14.jpg",
+                   "t15.jpg",
+                   "t16.jpg",
+                   "t17.jpg",
+                   "t18.jpg",
+                   "t19.jpg",
+                   "t20.jpg",
+                   "t21.jpg",
+                   "t22.jpg",
+                   "t23.jpg",
+                   "t24.jpg"
                 ]
             },
 
