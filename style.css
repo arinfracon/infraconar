@@ -66,8 +66,8 @@ textarea {
 
 .logo img {
     display: block;
-    width: 200px;
-    height: auto;
+    width: auto;
+    height: 150px;
     object-fit: contain;
 }
 
@@ -82,7 +82,7 @@ textarea {
     position: relative;
     text-decoration: none;
     color: #222;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     white-space: nowrap;
     transition: color 0.25s ease;
