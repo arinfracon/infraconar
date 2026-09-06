@@ -420,7 +420,7 @@
             "kitchen-designs": {
                 title: "Kitchen",
                 images: [
-                   "images/kitchen1.jpg",
+                   "v1.mp4",
                    "1.jpg",
                    "2.jpg",
                    "3.jpg",
