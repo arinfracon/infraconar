@@ -1,302 +1,2858 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>AR Infracon | About</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/><link href="style.css" rel="stylesheet"/></head><body><header class="header">
-<div class="logo">
-<!-- Replace with your logo -->
-<img alt="AR Infracon" src="comp logo.jpeg"/>
-</div>
-<button class="menu-btn">
-<i class="fa-solid fa-bars"></i>
-</button>
-<nav class="navbar"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="service.html">Service</a><a href="portfolio.html">Blog</a><a href="quote.html">Quote</a><a href="contact.html">Contact Us</a></nav>
-<a class="consult-btn" href="https://wa.me/9119650333">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            Free Consultation
+    <title>AR Infracon | About Us | Interior Design</title>
+
+    <meta name="description"
+        content="AR Infracon creates modern, luxury, minimal and traditional interior designs for residential and commercial spaces.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Your existing CSS -->
+    <link rel="stylesheet" href="style.css">
+
+
+<style>
+
+/* =========================================================
+   AR INFRACON ABOUT PAGE
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #fff;
+    color: #222;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   ABOUT HERO SLIDER
+   ========================================================= */
+
+.about-hero {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-slider {
+    position: relative;
+    width: 100%;
+    height: 680px;
+    overflow: hidden;
+}
+
+.about-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+}
+
+.about-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.about-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-slide-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.78) 0%,
+            rgba(0,0,0,0.50) 40%,
+            rgba(0,0,0,0.10) 100%
+        );
+}
+
+.about-slide-content {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+
+    width: min(650px, 80%);
+
+    color: #fff;
+}
+
+.about-slide-content span {
+    display: inline-block;
+
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+}
+
+.about-slide-content h1 {
+    margin: 0 0 20px;
+
+    font-size: clamp(38px, 5vw, 70px);
+    line-height: 1.08;
+    font-weight: 700;
+}
+
+.about-slide-content p {
+    max-width: 570px;
+
+    margin: 0 0 30px;
+
+    font-size: 17px;
+    line-height: 1.8;
+
+    color: rgba(255,255,255,0.92);
+}
+
+.hero-about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 27px;
+
+    background: #fff;
+    color: #111;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 3px;
+
+    transition: 0.3s ease;
+}
+
+.hero-about-btn:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+
+/* Slider arrows */
+
+.about-slider-prev,
+.about-slider-next {
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 52px;
+    height: 52px;
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    background: rgba(0,0,0,0.25);
+
+    color: #fff;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition: 0.3s;
+}
+
+.about-slider-prev {
+    left: 30px;
+}
+
+.about-slider-next {
+    right: 30px;
+}
+
+.about-slider-prev:hover,
+.about-slider-next:hover {
+    background: #fff;
+    color: #111;
+}
+
+
+/* Dots */
+
+.about-slider-dots {
+    position: absolute;
+
+    bottom: 28px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 9px;
+
+    z-index: 10;
+}
+
+.about-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.5);
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.about-dot.active {
+    width: 28px;
+    border-radius: 20px;
+    background: #fff;
+}
+
+
+/* =========================================================
+   COMMON SECTION
+   ========================================================= */
+
+.about-company,
+.design-style-section,
+.why-us,
+.team,
+.testimonials,
+.faq {
+    padding: 100px 7%;
+}
+
+.section-title {
+    max-width: 750px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.small-heading {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    opacity: 0.65;
+}
+
+.section-title h2 {
+    margin: 0 0 15px;
+
+    font-size: clamp(30px, 4vw, 46px);
+
+    line-height: 1.2;
+
+    color: #171717;
+}
+
+.section-title p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ABOUT COMPANY
+   ========================================================= */
+
+.about-company {
+    background: #fff;
+}
+
+.about-company-content {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.about-company-image {
+    position: relative;
+}
+
+.about-company-image::after {
+    content: "";
+
+    position: absolute;
+
+    width: 75%;
+    height: 75%;
+
+    right: -20px;
+    bottom: -20px;
+
+    border: 1px solid #d5d5d5;
+
+    z-index: 0;
+}
+
+.about-company-image img {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 560px;
+
+    object-fit: cover;
+}
+
+.about-company-text {
+    font-size: 15px;
+
+    line-height: 1.85;
+
+    color: #666;
+}
+
+.about-company-text p {
+    margin: 0 0 15px;
+}
+
+
+/* =========================================================
+   DESIGN STYLE SECTION
+   ========================================================= */
+
+.design-style-section {
+    background: #f7f7f5;
+}
+
+.design-style-grid {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.design-style-card {
+    display: block;
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 510px;
+
+    border-radius: 3px;
+
+    color: #fff;
+
+    background: #222;
+}
+
+.design-style-image {
+    position: absolute;
+    inset: 0;
+}
+
+.design-style-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.8s ease;
+}
+
+.design-style-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.88),
+            rgba(0,0,0,0.12) 70%
+        );
+}
+
+.design-style-card:hover img {
+    transform: scale(1.08);
+}
+
+.design-style-content {
+    position: absolute;
+
+    left: 28px;
+    right: 28px;
+    bottom: 30px;
+}
+
+.design-style-content span {
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.8;
+}
+
+.design-style-content h3 {
+    margin: 8px 0 10px;
+
+    font-size: 32px;
+
+    font-weight: 600;
+}
+
+.design-style-content p {
+    margin: 0 0 22px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.85);
+}
+
+.style-explore {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.style-explore i {
+    transition: transform 0.3s;
+}
+
+.design-style-card:hover .style-explore i {
+    transform: translateX(7px);
+}
+
+.style-note {
+    margin-top: 35px;
+
+    text-align: center;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 13px;
+
+    color: #777;
+}
+
+.style-note i {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   WHY CHOOSE
+   ========================================================= */
+
+.why-us {
+    background: #fff;
+}
+
+.why-grid {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.why-card {
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border: 1px solid #e7e7e7;
+
+    background: #fff;
+
+    transition: 0.35s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+
+.why-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #f3f3f3;
+
+    font-size: 21px;
+}
+
+.why-card h3 {
+    margin: 0 0 10px;
+
+    font-size: 18px;
+}
+
+.why-card p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #777;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   TEAM
+   ========================================================= */
+
+.team {
+    background: #f7f7f5;
+}
+
+.team-grid {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+.team-card {
+    text-align: center;
+
+    background: #fff;
+
+    padding-bottom: 25px;
+
+    overflow: hidden;
+
+    transition: 0.35s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+}
+
+.team-card img {
+    width: 100%;
+    height: 300px;
+
+    object-fit: cover;
+}
+
+.team-card h3 {
+    margin: 20px 10px 5px;
+
+    font-size: 18px;
+}
+
+.team-card h4 {
+    margin: 0 0 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #777;
+}
+
+.team-card p {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #999;
+}
+
+
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
+
+.testimonials {
+    background: #fff;
+}
+
+.testimonial-grid {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.testimonial-card {
+    position: relative;
+
+    padding: 40px 30px;
+
+    border: 1px solid #e7e7e7;
+
+    background: #fff;
+
+    transition: 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+}
+
+.quote-icon {
+    font-size: 25px;
+
+    margin-bottom: 15px;
+
+    opacity: 0.35;
+}
+
+.stars {
+    margin-bottom: 15px;
+
+    letter-spacing: 3px;
+
+    font-size: 15px;
+}
+
+.testimonial-card p {
+    margin: 0 0 22px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.testimonial-card h3 {
+    margin: 0;
+
+    font-size: 16px;
+}
+
+.testimonial-card span {
+    font-size: 12px;
+
+    color: #999;
+}
+
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.faq {
+    background: #f7f7f5;
+}
+
+.faq-container {
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.faq-container details {
+    margin-bottom: 12px;
+
+    background: #fff;
+
+    border: 1px solid #e5e5e5;
+}
+
+.faq-container summary {
+    list-style: none;
+
+    cursor: pointer;
+
+    padding: 22px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.faq-container summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-container summary i {
+    transition: 0.3s;
+}
+
+.faq-container details[open] summary i {
+    transform: rotate(45deg);
+}
+
+.faq-container details p {
+    margin: 0;
+
+    padding: 0 25px 25px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.about-cta {
+    position: relative;
+
+    min-height: 500px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.70),
+            rgba(0,0,0,0.70)
+        ),
+        url("https://www.vivifycreatives.in/storage/service/4.jpg")
+        center/cover no-repeat;
+}
+
+.about-cta-content {
+    max-width: 750px;
+
+    padding: 50px 20px;
+}
+
+.about-cta-content > span {
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    font-weight: 600;
+}
+
+.about-cta-content h2 {
+    margin: 18px 0;
+
+    font-size: clamp(35px, 5vw, 60px);
+
+    line-height: 1.15;
+}
+
+.about-cta-content p {
+    max-width: 600px;
+
+    margin: auto auto 30px;
+
+    color: rgba(255,255,255,0.85);
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+.about-cta-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.about-cta-buttons a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 25px;
+
+    background: #fff;
+
+    color: #111;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.about-cta-buttons a:last-child {
+    background: transparent;
+
+    color: #fff;
+
+    border: 1px solid rgba(255,255,255,0.7);
+}
+
+.about-cta-buttons a:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    background: #111;
+
+    color: #fff;
+}
+
+.footer-grid {
+    padding: 70px 7%;
+
+    display: grid;
+
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+
+    gap: 45px;
+}
+
+.footer-grid h3 {
+    margin: 0 0 20px;
+
+    font-size: 18px;
+}
+
+.footer-grid p {
+    margin: 0 0 10px;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+.footer-grid ul {
+    padding: 0;
+
+    margin: 0;
+
+    list-style: none;
+}
+
+.footer-grid li {
+    margin-bottom: 9px;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.footer-grid a {
+    color: #aaa;
+
+    transition: 0.3s;
+}
+
+.footer-grid a:hover {
+    color: #fff;
+}
+
+.footer-social {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.footer-social a {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #333;
+
+    border-radius: 50%;
+
+    color: #fff;
+}
+
+.footer-social a:hover {
+    background: #fff;
+
+    color: #111;
+}
+
+.copyright {
+    padding: 20px 7%;
+
+    text-align: center;
+
+    border-top: 1px solid #292929;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FLOATING WHATSAPP
+   ========================================================= */
+
+.floating-whatsapp {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #25D366;
+
+    color: #fff;
+
+    font-size: 27px;
+
+    z-index: 999;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .design-style-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .about-slider {
+        height: 580px;
+    }
+
+    .about-slide-content {
+        left: 7%;
+        width: 82%;
+    }
+
+    .about-slide-content h1 {
+        font-size: 40px;
+    }
+
+    .about-slide-content p {
+        font-size: 14px;
+    }
+
+    .about-slider-prev,
+    .about-slider-next {
+        width: 42px;
+        height: 42px;
+    }
+
+    .about-slider-prev {
+        left: 15px;
+    }
+
+    .about-slider-next {
+        right: 15px;
+    }
+
+    .about-company-content {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .about-company-image img {
+        height: 450px;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .about-company,
+    .design-style-section,
+    .why-us,
+    .team,
+    .testimonials,
+    .faq {
+        padding: 70px 5%;
+    }
+
+    .about-slider {
+        height: 560px;
+    }
+
+    .about-slide-content {
+        left: 6%;
+        width: 88%;
+    }
+
+    .about-slide-content span {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+    .about-slide-content h1 {
+        font-size: 34px;
+    }
+
+    .about-slide-content p {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+    .about-slider-prev,
+    .about-slider-next {
+        display: none;
+    }
+
+    .design-style-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .design-style-card {
+        min-height: 450px;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-card img {
+        height: 350px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+
+        padding: 55px 7%;
+    }
+
+    .about-cta {
+        min-height: 480px;
+    }
+
+    .about-cta-content h2 {
+        font-size: 38px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header class="header">
+
+    <div class="logo">
+        <img src="comp logo.jpeg" alt="AR Infracon">
+    </div>
+
+    <button class="menu-btn" aria-label="Open Menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav class="navbar">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html" class="active">
+            About Us
+        </a>
+
+        <a href="service.html">
+            Service
+        </a>
+
+        <a href="portfolio.html">
+            Blog
+        </a>
+
+        <a href="quote.html">
+            Quote
+        </a>
+
+        <a href="contact.html">
+            Contact Us
+        </a>
+
+    </nav>
+
+    <a
+        class="consult-btn"
+        href="https://wa.me/919119650333"
+        target="_blank">
+
+        Free Consultation
+
+    </a>
+
+</header>
+
+
+<!-- =========================================================
+     ABOUT HERO SLIDER
+     ========================================================= -->
+
+<section class="about-hero">
+
+<div class="about-slider">
+
+
+    <!-- SLIDE 1 -->
+
+    <div class="about-slide active">
+
+        <img
+            src="https://cdn.sanity.io/images/rhvb8nfd/production/45d82d1df4f26061bd80cc1e64d34ff7c7ba7890-4500x3060.png?auto=format&fit=max"
+            alt="Modern interior living room">
+
+        <div class="about-slide-overlay"></div>
+
+        <div class="about-slide-content">
+
+            <span>
+                WELCOME TO AR INFRACON
+            </span>
+
+            <h1>
+                We Design Spaces
+                <br>
+                That Feel Like Home
+            </h1>
+
+            <p>
+                Thoughtful interiors, quality materials and
+                professional execution — all under one roof.
+            </p>
+
+            <a
+                href="contact.html"
+                class="hero-about-btn">
+
+                Start Your Journey
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SLIDE 2 -->
+
+    <div class="about-slide">
+
+        <img
+            src="https://static.wixstatic.com/media/7ab475_d6acdabb77044c809a82f1e2f118ae0e~mv2.jpg/v1/fill/w_980%2Ch_551%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/7ab475_d6acdabb77044c809a82f1e2f118ae0e~mv2.jpg"
+            alt="Modern luxury interior">
+
+        <div class="about-slide-overlay"></div>
+
+        <div class="about-slide-content">
+
+            <span>
+                DESIGN WITH PURPOSE
+            </span>
+
+            <h1>
+                Beautiful Interiors
+                <br>
+                Made For Your Lifestyle
+            </h1>
+
+            <p>
+                Every space is planned around your needs,
+                personality and everyday living.
+            </p>
+
+            <a
+                href="quote.html"
+                class="hero-about-btn">
+
+                Get A Quote
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SLIDE 3 -->
+
+    <div class="about-slide">
+
+        <img
+            src="https://images.squarespace-cdn.com/content/v1/5b45c9f5af2096c73703ae69/0f9c30ab-5524-48ee-8d54-64ce6f668bd5/Xander%2BPrestige%2BGroup%2BLondon"
+            alt="Luxury interior design">
+
+        <div class="about-slide-overlay"></div>
+
+        <div class="about-slide-content">
+
+            <span>
+                FROM CONCEPT TO COMPLETION
+            </span>
+
+            <h1>
+                One Team.
+                <br>
+                Complete Interior Solutions.
+            </h1>
+
+            <p>
+                From initial ideas and 3D visualization to
+                final execution, we manage every detail.
+            </p>
+
+            <a
+                href="service.html"
+                class="hero-about-btn">
+
+                Explore Services
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SLIDE 4 -->
+
+    <div class="about-slide">
+
+        <img
+            src="https://www.vivifycreatives.in/storage/service/4.jpg"
+            alt="Premium interior design">
+
+        <div class="about-slide-overlay"></div>
+
+        <div class="about-slide-content">
+
+            <span>
+                QUALITY & CRAFTSMANSHIP
+            </span>
+
+            <h1>
+                Details That Make
+                <br>
+                A Difference
+            </h1>
+
+            <p>
+                We combine modern design thinking with
+                reliable materials and skilled workmanship.
+            </p>
+
+            <a
+                href="portfolio.html"
+                class="hero-about-btn">
+
+                View Our Work
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SLIDE 5 -->
+
+    <div class="about-slide">
+
+        <img
+            src="https://www.simedarbyproperty.com/sites/default/files/inline-images/eg7-takenup-3.jpg"
+            alt="Contemporary home interior">
+
+        <div class="about-slide-overlay"></div>
+
+        <div class="about-slide-content">
+
+            <span>
+                AR INFRACON
+            </span>
+
+            <h1>
+                Your Vision.
+                <br>
+                Our Expertise.
+            </h1>
+
+            <p>
+                Creating residential and commercial spaces
+                that are elegant, functional and timeless.
+            </p>
+
+            <a
+                href="contact.html"
+                class="hero-about-btn">
+
+                Talk To Our Team
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ARROWS -->
+
+    <button
+        class="about-slider-prev"
+        aria-label="Previous Slide">
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+
+    <button
+        class="about-slider-next"
+        aria-label="Next Slide">
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+
+    <!-- DOTS -->
+
+    <div class="about-slider-dots">
+
+        <span
+            class="about-dot active"
+            data-slide="0">
+        </span>
+
+        <span
+            class="about-dot"
+            data-slide="1">
+        </span>
+
+        <span
+            class="about-dot"
+            data-slide="2">
+        </span>
+
+        <span
+            class="about-dot"
+            data-slide="3">
+        </span>
+
+        <span
+            class="about-dot"
+            data-slide="4">
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT AR INFRACON
+     ========================================================= -->
+
+<section class="about-company">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            ABOUT AR INFRACON
+        </span>
+
+        <h2>
+            Creating Spaces That Inspire
+        </h2>
+
+        <p>
+            More than interiors, we create experiences designed around you.
+        </p>
+
+    </div>
+
+
+    <div class="about-company-content">
+
+
+        <div class="about-company-image">
+
+            <img
+                src="https://www.mieaproperties.ae/wp-content/uploads/2025/04/Interior-West-Nawayef-Mansions-Hudayriyat-Villas-9-1024x576-1.jpg"
+                alt="AR Infracon interior design">
+
+        </div>
+
+
+        <div class="about-company-text">
+
+            <p>
+                AR Infracon is an interior design and execution company
+                focused on creating beautiful, functional and comfortable spaces.
+            </p>
+
+            <p>
+                We believe every interior should reflect the personality,
+                lifestyle and vision of the people who use it.
+            </p>
+
+            <p>
+                Our team combines creative design thinking with practical
+                planning to deliver interiors that are both attractive and useful.
+            </p>
+
+            <p>
+                From concept development and space planning to materials,
+                furniture and final execution, we take care of every important detail.
+            </p>
+
+            <p>
+                We work with trusted materials and experienced professionals
+                to maintain quality throughout the project.
+            </p>
+
+            <p>
+                With transparent communication and a customer-first approach,
+                we keep the design and execution process simple and stress-free.
+            </p>
+
+            <p>
+                Our goal is simple — to turn your ideas into interiors that
+                you will love living and working in for years to come.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CHOOSE YOUR FAVOURITE DESIGN
+     ========================================================= -->
+
+<section class="design-style-section">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            FIND YOUR STYLE
+        </span>
+
+        <h2>
+            Choose Your Favourite Design
+        </h2>
+
+        <p>
+            Explore different interior styles and discover the look
+            that best matches your personality and lifestyle.
+        </p>
+
+    </div>
+
+
+    <div class="design-style-grid">
+
+
+        <!-- MODERN -->
+
+        <a
+            href="modern.html"
+            class="design-style-card">
+
+            <div class="design-style-image">
+
+                <img
+                    src="https://cdn.sanity.io/images/rhvb8nfd/production/45d82d1df4f26061bd80cc1e64d34ff7c7ba7890-4500x3060.png?auto=format&fit=max"
+                    alt="Modern Interior Design">
+
+                <div class="design-style-overlay"></div>
+
+                <div class="design-style-content">
+
+                    <span>01</span>
+
+                    <h3>
+                        Modern
+                    </h3>
+
+                    <p>
+                        Clean lines, smart layouts and
+                        contemporary elegance.
+                    </p>
+
+                    <div class="style-explore">
+
+                        Explore Style
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </a>
-</header><section class="style-quiz">
-<div class="section-title">
-<h2>What's Your Interior Style?</h2>
-<p>Choose your favorite style.</p>
-</div>
-<div class="quiz-options">
-<button class="quiz-btn" data-style="Modern">
 
-            Modern
 
-        </button>
-<button class="quiz-btn" data-style="Luxury">
+        <!-- LUXURY -->
 
-            Luxury
+        <a
+            href="luxury.html"
+            class="design-style-card">
 
-        </button>
-<button class="quiz-btn" data-style="Minimal">
+            <div class="design-style-image">
 
-            Minimal
+                <img
+                    src="https://hungtuy.com.vn/data/media/1498/images/rsz_phong-cach-noi-that-luxury-thuong-luu-dang-cap-cho-khong-gian-song.jpg"
+                    alt="Luxury Interior Design">
 
-        </button>
-<button class="quiz-btn" data-style="Traditional">
+                <div class="design-style-overlay"></div>
 
-            Traditional
+                <div class="design-style-content">
 
-        </button>
-</div>
-<h3 id="quizResult"></h3>
-</section><section class="why-us">
-<div class="section-title">
-<h2>Why Choose AR Infracon?</h2>
-</div>
-<div class="why-grid">
-<div class="why-card">
-<h3>3D Design</h3>
-<p>Complete visualization.</p>
-</div>
-<div class="why-card">
-<h3>Premium Materials</h3>
-<p>High-quality products.</p>
-</div>
-<div class="why-card">
-<h3>Transparent Pricing</h3>
-<p>No hidden costs.</p>
-</div>
-<div class="why-card">
-<h3>On-Time Delivery</h3>
-<p>Project completion on schedule.</p>
-</div>
-<div class="why-card">
-<h3>Free Consultation</h3>
-<p>Expert guidance.</p>
-</div>
-<div class="why-card">
-<h3>Dedicated Team</h3>
-<p>Professional support.</p>
-</div>
-<div class="why-card">
-<h3>Modern Design</h3>
-<p>Latest interior trends.</p>
-</div>
-<div class="why-card">
-<h3>After-Work Support</h3>
-<p>Long-term assistance.</p>
-</div>
-</div>
-</section><section class="team" id="team">
-<div class="section-title">
-<h2>Meet Our Team</h2>
-<p>
-            You can update all team members later.
+                    <span>02</span>
+
+                    <h3>
+                        Luxury
+                    </h3>
+
+                    <p>
+                        Premium finishes, sophisticated details
+                        and timeless beauty.
+                    </p>
+
+                    <div class="style-explore">
+
+                        Explore Style
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- MINIMAL -->
+
+        <a
+            href="minimal.html"
+            class="design-style-card">
+
+            <div class="design-style-image">
+
+                <img
+                    src="https://mieaproperties.ae/wp-content/uploads/2025/04/Interior-West-Nawayef-Mansions-Hudayriyat-Villas-9-1024x576-1.jpg"
+                    alt="Minimal Interior Design">
+
+                <div class="design-style-overlay"></div>
+
+                <div class="design-style-content">
+
+                    <span>03</span>
+
+                    <h3>
+                        Minimal
+                    </h3>
+
+                    <p>
+                        Simple, calm and clutter-free spaces
+                        designed with purpose.
+                    </p>
+
+                    <div class="style-explore">
+
+                        Explore Style
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- TRADITIONAL -->
+
+        <a
+            href="traditional.html"
+            class="design-style-card">
+
+            <div class="design-style-image">
+
+                <img
+                    src="https://static.wixstatic.com/media/bd3995_b0f60575baaf4775b7be9e4ec424ba5d~mv2.png/v1/fill/w_1000%2Ch_667%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01/bd3995_b0f60575baaf4775b7be9e4ec424ba5d~mv2.png"
+                    alt="Traditional Indian Interior Design">
+
+                <div class="design-style-overlay"></div>
+
+                <div class="design-style-content">
+
+                    <span>04</span>
+
+                    <h3>
+                        Traditional
+                    </h3>
+
+                    <p>
+                        Timeless character, warm colours
+                        and classic detailing.
+                    </p>
+
+                    <div class="style-explore">
+
+                        Explore Style
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <div class="style-note">
+
+        <i class="fa-solid fa-hand-pointer"></i>
+
+        Click any design style to explore it in detail.
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY CHOOSE AR INFRACON
+     ========================================================= -->
+
+<section class="why-us">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            WHY AR INFRACON
+        </span>
+
+        <h2>
+            Why Choose AR Infracon?
+        </h2>
+
+        <p>
+            We combine creative design, quality execution and
+            transparent service to make your interior journey easier.
         </p>
-</div>
-<div class="team-grid">
-<div class="team-card">
-<img src="tuna rai.jpeg"/>
-<h3>Ameresh Rai</h3>
-<h4>Founder</h4>
-<p>15+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="manging director.jpeg"/>
-<h3>Ankur Singh</h3>
-<h4>CO-Founder</h4>
-<p>12+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="Abhinav Pathak g.jpeg"/>
-<h3>Abhinav Pathak</h3>
-<h4>Managing Director</h4>
-<p>10+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="aman r.jpeg"/>
-<h3>Aman Rai</h3>
-<h4>Managing Director</h4>
-<p>8+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="bk jha.jpeg"/>
-<h3>BK Jha</h3>
-<h4>Marketing Head</h4>
-<p>11+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="cs.jpeg"/>
-<h3>Chesta Rani</h3>
-<h3>Customer Support</h3>
-<p>3+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="https://cdn.pixabay.com/photo/2024/03/15/19/51/ai-generated-8635685_1280.png"/>
-<h3> Vishal Singh</h3>
-<h4>Operations Manager</h4>
-<p>5+ Years Experience</p>
-</div>
-<div class="team-card">
-<img src="it.jpeg"/>
-<h3>Ankit Singh</h3>
-<h3>IT HEAD</h3>
-<p>3+ Years Experience</p>
-</div>
-</div>
-</section><section class="testimonials">
-<div class="section-title">
-<h2>What Our Clients Say</h2>
-<p>Trusted by homeowners across India.</p>
-</div>
-<div class="testimonial-grid">
-<div class="testimonial-card">
-<h3>Rahul Sharma</h3>
-<div class="stars">
 
-                ★★★★★
+    </div>
 
+
+    <div class="why-grid">
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-cube"></i>
             </div>
-<p>
 
+            <h3>
+                3D Design
+            </h3>
+
+            <p>
+                Visualize your space before execution begins.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+
+            <h3>
+                Premium Materials
+            </h3>
+
+            <p>
+                Quality materials selected for durability and beauty.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+
+            <h3>
+                Transparent Pricing
+            </h3>
+
+            <p>
+                Clear pricing with no unnecessary hidden costs.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <h3>
+                On-Time Delivery
+            </h3>
+
+            <p>
+                Planned execution to keep your project on schedule.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+
+            <h3>
+                Free Consultation
+            </h3>
+
+            <p>
+                Get professional guidance before starting your project.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <h3>
+                Dedicated Team
+            </h3>
+
+            <p>
+                A professional team supporting your project at every stage.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+
+            <h3>
+                Modern Design
+            </h3>
+
+            <p>
+                Design solutions inspired by current interior trends.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <h3>
+                After-Work Support
+            </h3>
+
+            <p>
+                Continued assistance even after project completion.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MEET OUR TEAM
+     ========================================================= -->
+
+<section class="team" id="team">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            OUR PEOPLE
+        </span>
+
+        <h2>
+            Meet Our Team
+        </h2>
+
+        <p>
+            Creative minds and dedicated professionals working together
+            to create better spaces.
+        </p>
+
+    </div>
+
+
+    <div class="team-grid">
+
+
+        <div class="team-card">
+
+            <img
+                src="tuna rai.jpeg"
+                alt="Ameresh Rai">
+
+            <h3>
+                Ameresh Rai
+            </h3>
+
+            <h4>
+                Founder
+            </h4>
+
+            <p>
+                15+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="manging director.jpeg"
+                alt="Ankur Singh">
+
+            <h3>
+                Ankur Singh
+            </h3>
+
+            <h4>
+                Co-Founder
+            </h4>
+
+            <p>
+                12+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="Abhinav Pathak g.jpeg"
+                alt="Abhinav Pathak">
+
+            <h3>
+                Abhinav Pathak
+            </h3>
+
+            <h4>
+                Managing Director
+            </h4>
+
+            <p>
+                10+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="aman r.jpeg"
+                alt="Aman Rai">
+
+            <h3>
+                Aman Rai
+            </h3>
+
+            <h4>
+                Managing Director
+            </h4>
+
+            <p>
+                8+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="bk jha.jpeg"
+                alt="BK Jha">
+
+            <h3>
+                BK Jha
+            </h3>
+
+            <h4>
+                Marketing Head
+            </h4>
+
+            <p>
+                11+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="cs.jpeg"
+                alt="Chesta Rani">
+
+            <h3>
+                Chesta Rani
+            </h3>
+
+            <h4>
+                Customer Support
+            </h4>
+
+            <p>
+                3+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="https://cdn.pixabay.com/photo/2024/03/15/19/51/ai-generated-8635685_1280.png"
+                alt="Vishal Singh">
+
+            <h3>
+                Vishal Singh
+            </h3>
+
+            <h4>
+                Operations Manager
+            </h4>
+
+            <p>
+                5+ Years Experience
+            </p>
+
+        </div>
+
+
+        <div class="team-card">
+
+            <img
+                src="it.jpeg"
+                alt="Ankit Singh">
+
+            <h3>
+                Ankit Singh
+            </h3>
+
+            <h4>
+                IT Head
+            </h4>
+
+            <p>
+                3+ Years Experience
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TESTIMONIALS
+     ========================================================= -->
+
+<section class="testimonials">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            CLIENT STORIES
+        </span>
+
+        <h2>
+            What Our Clients Say
+        </h2>
+
+        <p>
+            Trusted by homeowners and businesses for thoughtful
+            interior solutions.
+        </p>
+
+    </div>
+
+
+    <div class="testimonial-grid">
+
+
+        <div class="testimonial-card">
+
+            <div class="quote-icon">
+                <i class="fa-solid fa-quote-left"></i>
+            </div>
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
                 Excellent work and timely delivery.
-
+                The team understood exactly what we wanted
+                and delivered a beautiful space.
             </p>
-</div>
-<div class="testimonial-card">
-<h3>Priya Singh</h3>
-<div class="stars">
 
-                ★★★★★
+            <h3>
+                Rahul Sharma
+            </h3>
 
+            <span>
+                Homeowner
+            </span>
+
+        </div>
+
+
+        <div class="testimonial-card">
+
+            <div class="quote-icon">
+                <i class="fa-solid fa-quote-left"></i>
             </div>
-<p>
 
-                Professional designers and premium
-                materials.
+            <div class="stars">
+                ★★★★★
+            </div>
 
+            <p>
+                Professional designers, good communication
+                and premium materials. The complete experience
+                was smooth.
             </p>
-</div>
-<div class="testimonial-card">
-<h3>Amit Verma</h3>
-<div class="stars">
 
-                ★★★★★
+            <h3>
+                Priya Singh
+            </h3>
 
+            <span>
+                Homeowner
+            </span>
+
+        </div>
+
+
+        <div class="testimonial-card">
+
+            <div class="quote-icon">
+                <i class="fa-solid fa-quote-left"></i>
             </div>
-<p>
 
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
                 Very satisfied with the final result.
-
+                The design was practical, elegant and exactly
+                what we had imagined.
             </p>
-</div>
-</div>
-</section><section class="faq">
-<div class="section-title">
-<h2>Frequently Asked Questions</h2>
-</div>
-<div class="faq-container">
-<details>
-<summary>
 
-                How long does a project take?
+            <h3>
+                Amit Verma
+            </h3>
+
+            <span>
+                Client
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+     ========================================================= -->
+
+<section class="faq">
+
+    <div class="section-title">
+
+        <span class="small-heading">
+            NEED TO KNOW
+        </span>
+
+        <h2>
+            Frequently Asked Questions
+        </h2>
+
+        <p>
+            Some common questions about our interior design process.
+        </p>
+
+    </div>
+
+
+    <div class="faq-container">
+
+
+        <details>
+
+            <summary>
+
+                How long does an interior project take?
+
+                <i class="fa-solid fa-plus"></i>
 
             </summary>
-<p>
 
-                The timeline depends on the project size.
-
+            <p>
+                Project duration depends on the size, design requirements,
+                materials and scope of work. After understanding your project,
+                our team can provide an estimated timeline.
             </p>
-</details>
-<details>
-<summary>
+
+        </details>
+
+
+        <details>
+
+            <summary>
 
                 Do you provide 3D designs?
 
+                <i class="fa-solid fa-plus"></i>
+
             </summary>
-<p>
 
-                Yes, we provide 3D visualization.
-
+            <p>
+                Yes. We provide 3D visualizations to help you understand
+                the proposed design, colours, furniture and overall appearance
+                before execution.
             </p>
-</details>
-<details>
-<summary>
+
+        </details>
+
+
+        <details>
+
+            <summary>
 
                 Is the consultation free?
 
+                <i class="fa-solid fa-plus"></i>
+
             </summary>
-<p>
 
-                Yes, the first consultation is free.
-
+            <p>
+                Yes. You can contact our team for an initial consultation
+                and discuss your requirements, budget and preferred design style.
             </p>
-</details>
-<details>
-<summary>
+
+        </details>
+
+
+        <details>
+
+            <summary>
+
+                Can I choose my own materials and colours?
+
+                <i class="fa-solid fa-plus"></i>
+
+            </summary>
+
+            <p>
+                Yes. We can help you select materials, finishes, colours,
+                furniture and other elements according to your preferences
+                and project requirements.
+            </p>
+
+        </details>
+
+
+        <details>
+
+            <summary>
 
                 Do you provide a warranty?
 
+                <i class="fa-solid fa-plus"></i>
+
             </summary>
-<p>
 
-                Yes, warranty terms depend on the package.
-
+            <p>
+                Warranty and service terms depend on the selected products,
+                materials and project package. Our team will explain the
+                applicable terms before execution.
             </p>
-</details>
-</div>
-</section><footer class="footer">
-<div class="footer-grid">
-<div>
-<h3>AR Infracon</h3>
-<p>
 
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+     ========================================================= -->
+
+<section class="about-cta">
+
+    <div class="about-cta-content">
+
+        <span>
+            LET'S CREATE SOMETHING BEAUTIFUL
+        </span>
+
+        <h2>
+            Ready To Transform
+            <br>
+            Your Space?
+        </h2>
+
+        <p>
+            Tell us about your project and let our design team
+            help turn your vision into reality.
+        </p>
+
+
+        <div class="about-cta-buttons">
+
+            <a
+                href="https://wa.me/919119650333"
+                target="_blank">
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                WhatsApp Us
+
+            </a>
+
+
+            <a href="quote.html">
+
+                Get A Quote
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+
+        <div>
+
+            <h3>
+                AR Infracon
+            </h3>
+
+            <p>
                 Modern interior design solutions
                 for residential and commercial
                 projects.
-
             </p>
-</div>
-<div>
-<h3>Our Services</h3>
-<ul>
-<li>Bedroom Design</li>
-<li>Modular Kitchen</li>
-<li>Living Room</li>
-<li>TV Unit</li>
-<li>Wardrobe</li>
-<li>Exterior Design</li>
-</ul>
-</div>
-<div>
-<h3>Quick Links</h3>
-<ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="quote.html">Quote</a></li><li><a href="contact.html">Contact</a></li></ul>
-</div>
-<div>
-<h3>Get In Touch</h3>
-<p>Email: infraconar@gmail.com</p>
-<p>Phone: +91 9119650333</p>
-<p>WhatsApp: +91 8573888988</p>
-<div class="footer-social">
-<a href="https://wa.me/+919119650333">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
-<a href="https://instagram.com/arinfracon">
-<i class="fa-brands fa-instagram"></i>
-</a>
-<a href="https://www.facebook.com/profile.php?id=61592429507288">
-<i class="fa-brands fa-facebook-f"></i>
-</a>
-<a href="https://linkedin.com/in/arinfracon">
-<i class="fa-brands fa-linkedin-in"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="copyright">
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Our Services
+            </h3>
+
+            <ul>
+
+                <li>
+                    Bedroom Design
+                </li>
+
+                <li>
+                    Modular Kitchen
+                </li>
+
+                <li>
+                    Living Room
+                </li>
+
+                <li>
+                    TV Unit
+                </li>
+
+                <li>
+                    Wardrobe
+                </li>
+
+                <li>
+                    Exterior Design
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="service.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="portfolio.html">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="quote.html">
+                        Quote
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Get In Touch
+            </h3>
+
+            <p>
+                Email: infraconar@gmail.com
+            </p>
+
+            <p>
+                Phone: +91 9119650333
+            </p>
+
+            <p>
+                WhatsApp: +91 8573888988
+            </p>
+
+
+            <div class="footer-social">
+
+                <a
+                    href="https://wa.me/919119650333"
+                    target="_blank">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                </a>
+
+
+                <a
+                    href="https://instagram.com/arinfracon"
+                    target="_blank">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.facebook.com/profile.php?id=61592429507288"
+                    target="_blank">
+
+                    <i class="fa-brands fa-facebook-f"></i>
+
+                </a>
+
+
+                <a
+                    href="https://linkedin.com/in/arinfracon"
+                    target="_blank">
+
+                    <i class="fa-brands fa-linkedin-in"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
 
         © 2026 AR Infracon. All Rights Reserved.
 
     </div>
-</footer><a class="floating-whatsapp" href="https://wa.me/+919119650333">
-<i class="fa-brands fa-whatsapp"></i>
-</a><button class="dark-mode-btn">
-<i class="fa-solid fa-moon"></i>
-</button><button class="scroll-top">
-<i class="fa-solid fa-arrow-up"></i>
-</button><button class="scroll-top">
-<i class="fa-solid fa-arrow-up"></i>
-</button><script src="app.js"></script></body></html>
+
+</footer>
+
+
+<!-- =========================================================
+     FLOATING WHATSAPP
+     ========================================================= -->
+
+<a
+    class="floating-whatsapp"
+    href="https://wa.me/919119650333"
+    target="_blank"
+    aria-label="WhatsApp">
+
+    <i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+
+<!-- =========================================================
+     EXISTING DARK MODE
+     ========================================================= -->
+
+<button
+    class="dark-mode-btn"
+    aria-label="Dark Mode">
+
+    <i class="fa-solid fa-moon"></i>
+
+</button>
+
+
+<!-- =========================================================
+     SCROLL TOP
+     ========================================================= -->
+
+<button
+    class="scroll-top"
+    aria-label="Scroll to top">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<!-- Your existing JS -->
+<script src="app.js"></script>
+
+
+<!-- =========================================================
+     ABOUT SLIDER JS
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slides =
+        document.querySelectorAll(".about-slide");
+
+    const dots =
+        document.querySelectorAll(".about-dot");
+
+    const nextButton =
+        document.querySelector(".about-slider-next");
+
+    const prevButton =
+        document.querySelector(".about-slider-prev");
+
+
+    let currentSlide = 0;
+
+    let autoSlide;
+
+
+    function showSlide(index) {
+
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        currentSlide = index;
+
+
+        slides.forEach(function (slide, i) {
+
+            slide.classList.toggle(
+                "active",
+                i === currentSlide
+            );
+
+        });
+
+
+        dots.forEach(function (dot, i) {
+
+            dot.classList.toggle(
+                "active",
+                i === currentSlide
+            );
+
+        });
+
+    }
+
+
+    function nextSlide() {
+
+        showSlide(currentSlide + 1);
+
+    }
+
+
+    function previousSlide() {
+
+        showSlide(currentSlide - 1);
+
+    }
+
+
+    function startAutoSlide() {
+
+        clearInterval(autoSlide);
+
+        autoSlide = setInterval(
+            nextSlide,
+            5000
+        );
+
+    }
+
+
+    if (nextButton) {
+
+        nextButton.addEventListener(
+            "click",
+            function () {
+
+                nextSlide();
+
+                startAutoSlide();
+
+            }
+        );
+
+    }
+
+
+    if (prevButton) {
+
+        prevButton.addEventListener(
+            "click",
+            function () {
+
+                previousSlide();
+
+                startAutoSlide();
+
+            }
+        );
+
+    }
+
+
+    dots.forEach(function (dot, index) {
+
+        dot.addEventListener(
+            "click",
+            function () {
+
+                showSlide(index);
+
+                startAutoSlide();
+
+            }
+        );
+
+    });
+
+
+    showSlide(0);
+
+    startAutoSlide();
+
+});
+
+</script>
+
+
+</body>
+</html>
